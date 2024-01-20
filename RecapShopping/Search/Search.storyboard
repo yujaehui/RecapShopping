@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pAZ-uG-vgK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="seY-IE-YwN">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -278,20 +278,20 @@
             </objects>
             <point key="canvasLocation" x="1011" y="1398"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="Ixj-xz-o4u">
+        <!--Setting-->
+        <scene sceneID="Vp3-zH-LMB">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" id="sF1-Fx-s8k" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0aR-Yo-MEG"/>
+                <viewControllerPlaceholder storyboardName="Setting" id="oVB-no-b50" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="v9O-hJ-OR1"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R73-7j-nwy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OIF-2M-JnQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="84" y="461"/>
+            <point key="canvasLocation" x="84" y="408"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="A5N-2A-4yf">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="seY-IE-YwN" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="mainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="seY-IE-YwN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ji7-bf-XDe">
                         <autoresizingMask key="autoresizingMask"/>
@@ -299,7 +299,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="V9c-Fx-vgq" kind="relationship" relationship="viewControllers" id="QzF-NJ-Zcw"/>
-                        <segue destination="sF1-Fx-s8k" kind="relationship" relationship="viewControllers" id="V5S-kn-Qgq"/>
+                        <segue destination="oVB-no-b50" kind="relationship" relationship="viewControllers" id="ivd-lS-g30"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tqz-WU-8UV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hfY-DC-HUf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E5c-bK-ODZ">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -31,6 +31,9 @@
                                 <rect key="frame" x="16" y="275" width="361" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="scl-NN-hFu"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2M-Fy-3KW">
                                 <rect key="frame" x="16" y="341" width="361" height="21"/>
@@ -46,6 +49,13 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Button"/>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uEf-CA-6HP">
+                                <rect key="frame" x="216.66666666666666" y="203" width="39.999999999999972" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="mG6-OE-im7"/>
+                                    <constraint firstAttribute="height" constant="40" id="s5w-mB-0QM"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -59,12 +69,15 @@
                             <constraint firstItem="c5I-np-xy8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Vaa-q8-xGS"/>
                             <constraint firstItem="qiR-EB-lpg" firstAttribute="top" secondItem="g2M-Fy-3KW" secondAttribute="bottom" constant="32" id="Wkx-QX-9W0"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="c5I-np-xy8" secondAttribute="trailing" constant="16" id="e5s-EL-Z3C"/>
+                            <constraint firstItem="uEf-CA-6HP" firstAttribute="bottom" secondItem="MEq-kR-Mxb" secondAttribute="bottom" id="gjz-FO-aUI"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="g2M-Fy-3KW" secondAttribute="trailing" constant="16" id="isN-VA-Jkc"/>
                             <constraint firstItem="qiR-EB-lpg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="kWX-Xa-67c"/>
+                            <constraint firstItem="uEf-CA-6HP" firstAttribute="trailing" secondItem="MEq-kR-Mxb" secondAttribute="trailing" id="lfa-zn-98v"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="프로필 설정" id="wfW-XM-ZMb"/>
                     <connections>
+                        <outlet property="cameraImageView" destination="uEf-CA-6HP" id="FKh-d2-Y1k"/>
                         <outlet property="completeButton" destination="qiR-EB-lpg" id="Ifg-6S-8ht"/>
                         <outlet property="nicknameStateLabel" destination="g2M-Fy-3KW" id="b4u-cJ-TRZ"/>
                         <outlet property="nicknameTextField" destination="c5I-np-xy8" id="8Hc-mp-Ol8"/>

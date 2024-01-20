@@ -12,7 +12,11 @@ enum SettingCellType: Int {
     case setting
 }
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, ProfileViewControllerDelegate {
+    func willDissmiss() {
+        settingTableView.reloadData()
+    }
+    
     
     @IBOutlet var settingTableView: UITableView!
     
@@ -35,7 +39,16 @@ class SettingViewController: UIViewController {
         
         settingTableView.rowHeight = UITableView.automaticDimension
         
+        setNavigation()
+        
     }
+    
+    func setNavigation() {
+        navigationItem.title = "설정"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+        navigationController?.navigationBar.tintColor = .text
+    }
+    
 }
 
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
@@ -54,10 +67,13 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == SettingCellType.profile.rawValue {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell", for: indexPath) as! ProfileTableViewCell
+            cell.selectionStyle = .none
             cell.backgroundColor = .secondaryLabel
-            cell.profileImageView.image = UIImage(named: "profile1")
+            let profileImage = UserDefaultsManager.shared.profileImage
+            cell.profileImageView.image = UIImage(named: "profile\(profileImage+1)")
             cell.profileImageView.configureProfileImageView()
-            cell.nicknameLabel.text = "유잭구"
+            let nickname = UserDefaultsManager.shared.nickname
+            cell.nicknameLabel.text = nickname
             cell.nicknameLabel.textColor = .text
             cell.nicknameLabel.font = .boldSystemFont(ofSize: 18)
             cell.likeStateLabel.text = "5게의 상품을 좋아하고 있어요!"
@@ -66,6 +82,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell", for: indexPath) as! SettingTableViewCell
+            cell.selectionStyle = .none
             cell.backgroundColor = .secondaryLabel
             cell.settingLabel.text = settingList[indexPath.row]
             cell.settingLabel.textColor = .text
@@ -74,6 +91,42 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
     }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == SettingCellType.profile.rawValue {
+            let sb = UIStoryboard(name: "Profile", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
+            vc.accessType = .edit
+            vc.tableView = tableView
+            vc.delegate = self
+            navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.section == SettingCellType.setting.rawValue && indexPath.row == 4 {
+        
+            let alert = UIAlertController(title: "회원 탈퇴", message: "이 작업은 되돌릴 수 없습니다.", preferredStyle: .alert)
+            let cancelButton = UIAlertAction(title: "취소", style: .cancel)
+            let secessionButton = UIAlertAction(title: "탈퇴", style: .destructive) { alert in
+                for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                    UserDefaults.standard.removeObject(forKey: key.description)
+                }
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                let sceneDelegate = windowScene?.delegate as? SceneDelegate
+                let sb = UIStoryboard(name: "Onboarding", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
+                let nav = UINavigationController(rootViewController: vc)
+                sceneDelegate?.window?.rootViewController = nav
+                sceneDelegate?.window?.makeKeyAndVisible()
+            }
+            
+            
+            alert.addAction(cancelButton)
+            alert.addAction(secessionButton)
+            
+            present(alert, animated: true)
+        }
+    }
+    
+     
     
     
 }

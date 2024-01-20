@@ -23,8 +23,11 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .background
         
         searchBar.searchTextField.textColor = .text
-        searchBar.barTintColor = .background
-        searchBar.placeholder = "브랜드, 상품, 프로필, 태그 등"
+        
+        searchBar.searchBarStyle = .minimal
+        searchBar.searchTextField.backgroundColor = .secondaryLabel
+        searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "브랜드, 상품, 프로필, 태그 등", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        searchBar.searchTextField.leftView?.tintColor = .lightGray
         
         recentSearchLabel.text = "최근 검색"
         recentSearchLabel.textColor = .text
@@ -44,7 +47,16 @@ class SearchViewController: UIViewController {
         recentSearchTableView.dataSource = self
         recentSearchTableView.delegate = self
         
+        setNavigation()
         
+        
+        
+    }
+    
+    func setNavigation() {
+        navigationItem.title = "\(UserDefaultsManager.shared.nickname)의 쇼핑"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+        navigationController?.navigationBar.tintColor = .text
     }
 }
 

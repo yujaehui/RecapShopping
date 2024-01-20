@@ -7,18 +7,26 @@
 
 import UIKit
 
+enum AccessType {
+    case setting
+    case edit
+}
+
 class ProfileImageViewController: UIViewController {
-    
     
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var profileImageCollectionView: UICollectionView!
+    
+    var type: AccessType = .setting
+    var userSelect = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .background
         
-        profileImageView.image = UIImage(named: "profile1")
+        let profileImage = UserDefaultsManager.shared.profileImage
+        profileImageView.image = UIImage(named: "profile\(profileImage+1)")
         profileImageView.configureProfileImageView()
         
         profileImageCollectionView.backgroundColor = .background
@@ -38,8 +46,22 @@ class ProfileImageViewController: UIViewController {
         layout.minimumInteritemSpacing = spacing
         profileImageCollectionView.collectionViewLayout = layout
         
+        setNavigation()
         
-
+        
+    }
+    
+    func setNavigation() {
+        navigationItem.title = type == .setting ? "프로필 설정" : "프로필 수정"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+        navigationController?.navigationBar.tintColor = .text
+        navigationItem.backBarButtonItem?.isEnabled = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(cancelButtonClicked))
+    }
+    
+    @objc func cancelButtonClicked() {
+        UserDefaultsManager.shared.profileImage = userSelect
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -54,11 +76,22 @@ extension ProfileImageViewController: UICollectionViewDataSource, UICollectionVi
         cell.profileImageView.contentMode = .scaleToFill
         cell.profileImageView.layer.cornerRadius = profileImageView.bounds.width / 4
         cell.profileImageView.clipsToBounds = true
+        
+        if userSelect == indexPath.row {
+            cell.profileImageView.layer.borderWidth = 4
+            cell.profileImageView.layer.borderColor = CGColor(srgbRed: 73/255, green: 220/255, blue: 146/255, alpha: 1)
+        } else {
+            cell.profileImageView.layer.borderWidth = 0
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        userSelect = indexPath.row
+        profileImageView.image = UIImage(named: "profile\(userSelect+1)")
+        collectionView.reloadData()
     }
     
     
