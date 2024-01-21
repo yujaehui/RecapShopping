@@ -40,7 +40,13 @@
 		09191D072B5CCDA600E3FE7B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 09191D062B5CCDA600E3FE7B /* Alamofire */; };
 		09191D0B2B5CCE4700E3FE7B /* Shopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D0A2B5CCE4700E3FE7B /* Shopping.swift */; };
 		09191D0E2B5CDF0C00E3FE7B /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 09191D0D2B5CDF0C00E3FE7B /* Kingfisher */; };
-		09191D102B5D32F500E3FE7B /* mainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D0F2B5D32F500E3FE7B /* mainTabBarController.swift */; };
+		09191D132B5D3D7100E3FE7B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D122B5D3D7100E3FE7B /* UIViewController+Extension.swift */; };
+		09191D152B5D3D8000E3FE7B /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D142B5D3D8000E3FE7B /* UITableViewCell+Extension.swift */; };
+		09191D172B5D3D8C00E3FE7B /* UICollectionViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D162B5D3D8C00E3FE7B /* UICollectionViewCell+Extension.swift */; };
+		09191D192B5D420400E3FE7B /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D182B5D420400E3FE7B /* UIImageView+Extension.swift */; };
+		09191D1D2B5D423D00E3FE7B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D1C2B5D423D00E3FE7B /* FontStyle.swift */; };
+		09191D222B5D442100E3FE7B /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D212B5D442100E3FE7B /* UITextField+Extension.swift */; };
+		09191D242B5D4B1200E3FE7B /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D232B5D4B1200E3FE7B /* UIButton+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +83,13 @@
 		09191D012B5CCBF300E3FE7B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		09191D032B5CCC2F00E3FE7B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		09191D0A2B5CCE4700E3FE7B /* Shopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shopping.swift; sourceTree = "<group>"; };
-		09191D0F2B5D32F500E3FE7B /* mainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mainTabBarController.swift; sourceTree = "<group>"; };
+		09191D122B5D3D7100E3FE7B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		09191D142B5D3D8000E3FE7B /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
+		09191D162B5D3D8C00E3FE7B /* UICollectionViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extension.swift"; sourceTree = "<group>"; };
+		09191D182B5D420400E3FE7B /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		09191D1C2B5D423D00E3FE7B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
+		09191D212B5D442100E3FE7B /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		09191D232B5D4B1200E3FE7B /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,9 +129,10 @@
 				09191CC92B5A17E100E3FE7B /* Search */,
 				09191CCA2B5A17F100E3FE7B /* Profile */,
 				09191CD12B5A1E0B00E3FE7B /* Setting */,
+				09191D112B5D3D5900E3FE7B /* Extension */,
+				09191D1A2B5D422C00E3FE7B /* Enum */,
 				09191CB32B5A17A600E3FE7B /* AppDelegate.swift */,
 				09191CB52B5A17A600E3FE7B /* SceneDelegate.swift */,
-				09191CFF2B5AAD6500E3FE7B /* UserDefaultsManager.swift */,
 				09191CB72B5A17A600E3FE7B /* ViewController.swift */,
 				09191CB92B5A17A600E3FE7B /* Main.storyboard */,
 				09191CBC2B5A17A700E3FE7B /* Assets.xcassets */,
@@ -127,7 +140,7 @@
 				09191CC12B5A17A700E3FE7B /* Info.plist */,
 				09191D012B5CCBF300E3FE7B /* .gitignore */,
 				09191D032B5CCC2F00E3FE7B /* APIKey.swift */,
-				09191D0F2B5D32F500E3FE7B /* mainTabBarController.swift */,
+				09191CFF2B5AAD6500E3FE7B /* UserDefaultsManager.swift */,
 			);
 			path = RecapShopping;
 			sourceTree = "<group>";
@@ -187,6 +200,27 @@
 				09191D0A2B5CCE4700E3FE7B /* Shopping.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		09191D112B5D3D5900E3FE7B /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				09191D122B5D3D7100E3FE7B /* UIViewController+Extension.swift */,
+				09191D142B5D3D8000E3FE7B /* UITableViewCell+Extension.swift */,
+				09191D162B5D3D8C00E3FE7B /* UICollectionViewCell+Extension.swift */,
+				09191D182B5D420400E3FE7B /* UIImageView+Extension.swift */,
+				09191D212B5D442100E3FE7B /* UITextField+Extension.swift */,
+				09191D232B5D4B1200E3FE7B /* UIButton+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		09191D1A2B5D422C00E3FE7B /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				09191D1C2B5D423D00E3FE7B /* FontStyle.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,13 +314,18 @@
 			files = (
 				09191CF42B5A51F400E3FE7B /* RecentSearchTableViewCell.swift in Sources */,
 				09191D0B2B5CCE4700E3FE7B /* Shopping.swift in Sources */,
+				09191D1D2B5D423D00E3FE7B /* FontStyle.swift in Sources */,
 				09191CEA2B5A4BBA00E3FE7B /* SettingTableViewCell.swift in Sources */,
 				09191D002B5AAD6500E3FE7B /* UserDefaultsManager.swift in Sources */,
-				09191D102B5D32F500E3FE7B /* mainTabBarController.swift in Sources */,
+				09191D192B5D420400E3FE7B /* UIImageView+Extension.swift in Sources */,
 				09191CD72B5A249300E3FE7B /* SearchViewController.swift in Sources */,
 				09191CB82B5A17A600E3FE7B /* ViewController.swift in Sources */,
+				09191D152B5D3D8000E3FE7B /* UITableViewCell+Extension.swift in Sources */,
 				09191CFA2B5A53DF00E3FE7B /* SearchResultCollectionViewCell.swift in Sources */,
+				09191D132B5D3D7100E3FE7B /* UIViewController+Extension.swift in Sources */,
+				09191D172B5D3D8C00E3FE7B /* UICollectionViewCell+Extension.swift in Sources */,
 				09191CB42B5A17A600E3FE7B /* AppDelegate.swift in Sources */,
+				09191D242B5D4B1200E3FE7B /* UIButton+Extension.swift in Sources */,
 				09191CE22B5A422400E3FE7B /* ProfileTableViewCell.swift in Sources */,
 				09191CB62B5A17A600E3FE7B /* SceneDelegate.swift in Sources */,
 				09191CEE2B5A4E2F00E3FE7B /* ProfileImageCollectionViewCell.swift in Sources */,
@@ -295,6 +334,7 @@
 				09191CDB2B5A2F1000E3FE7B /* ProfileViewController.swift in Sources */,
 				09191CD92B5A28E300E3FE7B /* SearchResultViewController.swift in Sources */,
 				09191CF12B5A51D900E3FE7B /* SearchDetailViewController.swift in Sources */,
+				09191D222B5D442100E3FE7B /* UITextField+Extension.swift in Sources */,
 				09191D042B5CCC2F00E3FE7B /* APIKey.swift in Sources */,
 				09191CD52B5A20E700E3FE7B /* OnboardingViewController.swift in Sources */,
 			);
@@ -448,6 +488,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NLBNZ4T579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RecapShopping/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -479,6 +520,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NLBNZ4T579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RecapShopping/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

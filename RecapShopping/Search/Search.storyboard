@@ -150,7 +150,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZd-ek-hbl">
-                                <rect key="frame" x="0.0" y="175" width="393" height="643"/>
+                                <rect key="frame" x="0.0" y="183" width="393" height="635"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7zz-4E-fmg">
                                     <size key="itemSize" width="128" height="128"/>
@@ -187,7 +187,7 @@
                             <constraint firstItem="3in-oi-XAG" firstAttribute="trailing" secondItem="TuV-e3-wjU" secondAttribute="trailing" constant="16" id="o2f-UE-Dk3"/>
                             <constraint firstItem="TuV-e3-wjU" firstAttribute="leading" secondItem="3in-oi-XAG" secondAttribute="leading" constant="16" id="oSF-99-F3U"/>
                             <constraint firstItem="TuV-e3-wjU" firstAttribute="top" secondItem="3in-oi-XAG" secondAttribute="top" id="p20-nH-3tR"/>
-                            <constraint firstItem="lZd-ek-hbl" firstAttribute="top" secondItem="nd1-bh-olD" secondAttribute="bottom" constant="8" id="ytt-5u-hNk"/>
+                            <constraint firstItem="lZd-ek-hbl" firstAttribute="top" secondItem="nd1-bh-olD" secondAttribute="bottom" constant="16" id="ytt-5u-hNk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="검색 결과 화면" id="oBf-Ft-9kJ"/>

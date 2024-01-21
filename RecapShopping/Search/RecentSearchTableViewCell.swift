@@ -14,5 +14,11 @@ class RecentSearchTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        backgroundColor = .background
+        magnifyingglassImageView.image = UIImage(systemName: "magnifyingglass")
+        magnifyingglassImageView.tintColor = .text
+        recentSearchLabel.textColor = .text
+        recentSearchLabel.font = FontStyle.tertiary
     }
 }

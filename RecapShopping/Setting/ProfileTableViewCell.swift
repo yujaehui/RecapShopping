@@ -15,6 +15,19 @@ class ProfileTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        selectionStyle = .none
+        backgroundColor = .secondaryLabel
+        
+        profileImageView.configureProfileImageView()
+        
+        let nickname = UserDefaultsManager.shared.nickname
+        nicknameLabel.text = nickname
+        nicknameLabel.textColor = .text
+        nicknameLabel.font = FontStyle.primary
+        
+        likeStateLabel.textColor = .text
+        likeStateLabel.font = FontStyle.secondary
     }
 }
+

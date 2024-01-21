@@ -13,5 +13,11 @@ class SettingTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        selectionStyle = .none
+        backgroundColor = .secondaryLabel
+        
+        settingLabel.textColor = .text
+        settingLabel.font = FontStyle.tertiary
     }
 }

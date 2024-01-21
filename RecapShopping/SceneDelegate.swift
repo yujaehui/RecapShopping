@@ -44,7 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let vc = sb.instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
             let nav = UINavigationController(rootViewController: vc)
             window?.rootViewController = nav
-            window?.makeKeyAndVisible() // 빼먹지 말 것 !!!
+            window?.makeKeyAndVisible()
         } else {
             guard let scene = (scene as? UIWindowScene) else { return }
             window = UIWindow(windowScene: scene)
@@ -55,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             vc.tabBar.tintColor = .point
             vc.tabBar.barTintColor = .secondaryLabel
             window?.rootViewController = vc
-            window?.makeKeyAndVisible() // 빼먹지 말 것 !!!
+            window?.makeKeyAndVisible()
         }
 
         

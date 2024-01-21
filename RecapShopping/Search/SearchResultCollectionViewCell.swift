@@ -18,7 +18,29 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        productImageView.layer.cornerRadius = 10
+        
+        brandLabel.textColor = .lightGray
+        brandLabel.font = FontStyle.tertiary
+        
+        productNameLabel.textColor = .text
+        productNameLabel.font = FontStyle.secondary
+        productNameLabel.numberOfLines = 2
+        
+        priceLabel.textColor = .text
+        priceLabel.font = FontStyle.primary
+        
+        heartButton.setTitle("", for: .normal)
+        heartButton.tintColor = .background
+        heartButton.backgroundColor = .text
+        heartButton.layer.cornerRadius = heartButton.frame.width / 2
+        heartButton.clipsToBounds = true
     }
-
+    
+    func configureCell(row: Item) {
+        let imageURL = URL(string: row.image)
+        productImageView.kf.setImage(with: imageURL)
+        brandLabel.text = row.brand
+    }
 }

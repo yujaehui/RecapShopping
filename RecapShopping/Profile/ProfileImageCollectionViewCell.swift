@@ -13,7 +13,10 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        profileImageView.contentMode = .scaleToFill
+        profileImageView.layer.cornerRadius = profileImageView.bounds.width / 4
+        profileImageView.clipsToBounds = true
     }
 
 }

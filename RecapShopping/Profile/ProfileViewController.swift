@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol ProfileViewControllerDelegate: AnyObject {
-    func willDismiss()
-}
-
 class ProfileViewController: UIViewController {
     
     @IBOutlet var profileButton: UIButton!
@@ -22,26 +18,21 @@ class ProfileViewController: UIViewController {
     var accessType: AccessType = .setting
     var userNickname = ""
     
-    weak var delegate: ProfileViewControllerDelegate?
-    var tableView: UITableView?
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .background
-        
         cameraImageView.image = UIImage(named: "camera")
         
         let profileImage = UserDefaultsManager.shared.profileImage
         profileButton.setImage(UIImage(named: "profile\(profileImage+1)"), for: .normal)
         profileButton.setTitle("", for: .normal)
-        
         profileButton.layer.cornerRadius = profileButton.bounds.width / 2
         profileButton.clipsToBounds = true
         profileButton.layer.borderWidth = 4
         profileButton.layer.borderColor = CGColor(srgbRed: 73/255, green: 220/255, blue: 146/255, alpha: 1)
     
+        nicknameTextField.becomeFirstResponder()
         nicknameTextField.attributedPlaceholder = NSAttributedString(string: "닉네임을 입력해주세요 :)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         nicknameTextField.textColor = .text
         nicknameTextField.borderStyle = .none
@@ -49,17 +40,15 @@ class ProfileViewController: UIViewController {
         nicknameTextField.text = accessType == .setting ? "" : UserDefaultsManager.shared.nickname
         
         nicknameStateLabel.text = ""
-        nicknameStateLabel.font = .systemFont(ofSize: 14)
+        nicknameStateLabel.font = FontStyle.tertiary
         
-        completeButton.primaryButton("완료")
+        completeButton.greenButton("완료")
         completeButton.isEnabled = true
         
         profileButton.addTarget(self, action: #selector(profileButtonClicked), for: .touchUpInside)
         completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
         
-        
         setNavigation()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,17 +81,9 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    func setNavigation() {
-        navigationItem.title = accessType == .setting ? "프로필 설정" : "프로필 수정"
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
-        navigationController?.navigationBar.tintColor = .text
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(cancelButtonClicked))
-    }
-    
     @objc func profileButtonClicked() {
         let sb = UIStoryboard(name: "Profile", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "ProfileImageViewController") as! ProfileImageViewController
+        let vc = sb.instantiateViewController(withIdentifier: ProfileImageViewController.identifier) as! ProfileImageViewController
         vc.type = accessType
         vc.userSelect = UserDefaultsManager.shared.profileImage
         navigationController?.pushViewController(vc, animated: true)
@@ -118,30 +99,28 @@ class ProfileViewController: UIViewController {
         UserDefaultsManager.shared.nickname = userNickname
         
         if accessType == .setting {
-            
             UserDefaults.standard.setValue(true, forKey: "UserState")
             let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
             let sceneDelegate = windowScene?.delegate as? SceneDelegate
             let sb = UIStoryboard(name: "Search", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
+            vc.tabBar.backgroundColor = .background
+            vc.tabBar.tintColor = .point
+            vc.tabBar.barTintColor = .secondaryLabel
             sceneDelegate?.window?.rootViewController = vc
             sceneDelegate?.window?.makeKeyAndVisible()
         } else {
-            delegate?.willDismiss()
             navigationController?.popViewController(animated: true)
         }
     }
-
 }
 
-extension UITextField {
-    func underLine(viewSize: CGFloat, color: UIColor) {
-        let border = CALayer()
-        let width = CGFloat(1)
-        border.borderColor = color.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.height, width: viewSize-48, height: width)
-        border.borderWidth = width
-        self.layer.addSublayer(border)
-        
+extension ProfileViewController {
+    func setNavigation() {
+        navigationItem.title = accessType == .setting ? "프로필 설정" : "프로필 수정"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+        navigationController?.navigationBar.tintColor = .text
+        navigationItem.backBarButtonItem?.isEnabled = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
     }
 }
