@@ -31,6 +31,15 @@
                                     <constraint firstAttribute="width" secondItem="nYp-Od-1av" secondAttribute="height" multiplier="1:1" id="m2U-DO-E7R"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZ4-u5-twD">
+                                <rect key="frame" x="16" y="606.66666666666663" width="361" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="LoR-gy-Ymg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alL-i4-tyk">
                                 <rect key="frame" x="16" y="175" width="42" height="20"/>
                                 <constraints>
@@ -56,8 +65,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="HZ4-u5-twD" firstAttribute="top" secondItem="nYp-Od-1av" secondAttribute="bottom" constant="8" id="52V-8N-VA0"/>
                             <constraint firstItem="nYp-Od-1av" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="6tV-lu-Gqs"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="SPe-wv-4ZX" secondAttribute="bottom" id="7Lz-Pz-Jhx"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HZ4-u5-twD" secondAttribute="trailing" constant="16" id="7li-6t-hpG"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="nYp-Od-1av" secondAttribute="trailing" constant="24" id="BsV-5b-YP2"/>
                             <constraint firstItem="G11-QH-XlH" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="CMP-rJ-lAE"/>
                             <constraint firstItem="G11-QH-XlH" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="CkE-4d-1Gj"/>
@@ -66,6 +77,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Zs2-cI-Yep" secondAttribute="trailing" constant="16" id="Shr-6P-DhX"/>
                             <constraint firstItem="SPe-wv-4ZX" firstAttribute="top" secondItem="alL-i4-tyk" secondAttribute="bottom" constant="16" id="VME-va-nDu"/>
                             <constraint firstItem="nYp-Od-1av" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="Ypc-0K-Fzk"/>
+                            <constraint firstItem="HZ4-u5-twD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="c22-98-JaW"/>
                             <constraint firstItem="G11-QH-XlH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="n9D-Vn-j1h"/>
                             <constraint firstItem="alL-i4-tyk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="pUk-vk-bFF"/>
                             <constraint firstItem="nYp-Od-1av" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="pgQ-BR-ztf"/>
@@ -77,6 +89,7 @@
                     <connections>
                         <outlet property="deleteAllButton" destination="Zs2-cI-Yep" id="XXS-eC-D0L"/>
                         <outlet property="emptyImageView" destination="nYp-Od-1av" id="oc2-aJ-qb2"/>
+                        <outlet property="emptyLabel" destination="HZ4-u5-twD" id="MRg-5Q-jGA"/>
                         <outlet property="recentSearchLabel" destination="alL-i4-tyk" id="JEw-XZ-2lY"/>
                         <outlet property="recentSearchTableView" destination="SPe-wv-4ZX" id="TkB-P3-IOD"/>
                         <outlet property="searchBar" destination="G11-QH-XlH" id="HGr-id-Gye"/>
@@ -179,22 +192,22 @@
                     </view>
                     <navigationItem key="navigationItem" title="검색 결과 화면" id="oBf-Ft-9kJ"/>
                     <connections>
-                        <outlet property="accuracyButton" destination="3M7-zL-8Jn" id="Ez0-ga-lmC"/>
-                        <outlet property="cheapButton" destination="YsD-9M-uv3" id="osv-N3-atm"/>
-                        <outlet property="dateButton" destination="nd1-bh-olD" id="VWH-eH-EPp"/>
-                        <outlet property="expensiveButton" destination="8GW-lY-HnO" id="khO-mV-F8k"/>
+                        <outlet property="accuracyButton" destination="3M7-zL-8Jn" id="pPg-KM-WEX"/>
+                        <outlet property="cheapButton" destination="YsD-9M-uv3" id="7Zf-Bn-T1Z"/>
+                        <outlet property="dateButton" destination="nd1-bh-olD" id="QFU-xl-cg1"/>
+                        <outlet property="expensiveButton" destination="8GW-lY-HnO" id="77f-Hb-Smb"/>
                         <outlet property="resultCollectionView" destination="lZd-ek-hbl" id="VWu-F4-dji"/>
                         <outlet property="resultCountLabel" destination="TuV-e3-wjU" id="m5m-TJ-Rms"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Na-nn-Fxf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1937" y="679"/>
+            <point key="canvasLocation" x="1936.6412213740457" y="678.87323943661977"/>
         </scene>
         <!--상품 상세 화면-->
         <scene sceneID="LKO-2B-2p2">
             <objects>
-                <viewController id="d5T-8S-cBf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchDetailViewController" id="d5T-8S-cBf" customClass="SearchDetailViewController" customModule="RecapShopping" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ghS-lc-cnd">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -218,16 +231,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="상품 상세 화면" id="rkl-Fm-FR3"/>
+                    <connections>
+                        <outlet property="webView" destination="SRS-pM-Gth" id="6fd-0r-KSX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nw3-RJ-LmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1937" y="1398"/>
         </scene>
-        <!--Item-->
+        <!--검색-->
         <scene sceneID="qyg-3y-TwG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V9c-Fx-vgq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="DRe-7f-vi7"/>
+                    <tabBarItem key="tabBarItem" title="검색" image="magnifyingglass" catalog="system" id="DRe-7f-vi7"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="wQ6-z8-YZb">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -294,6 +310,7 @@
                 <tabBarController storyboardIdentifier="mainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="seY-IE-YwN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ji7-bf-XDe">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -308,6 +325,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="117"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

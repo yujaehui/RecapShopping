@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ProfileViewControllerDelegate: AnyObject {
-    func willDissmiss()
+    func willDismiss()
 }
 
 class ProfileViewController: UIViewController {
@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController {
         nicknameStateLabel.font = .systemFont(ofSize: 14)
         
         completeButton.primaryButton("완료")
-        completeButton.isEnabled = false
+        completeButton.isEnabled = true
         
         profileButton.addTarget(self, action: #selector(profileButtonClicked), for: .touchUpInside)
         completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
@@ -127,7 +127,7 @@ class ProfileViewController: UIViewController {
             sceneDelegate?.window?.rootViewController = vc
             sceneDelegate?.window?.makeKeyAndVisible()
         } else {
-            delegate?.willDissmiss()
+            delegate?.willDismiss()
             navigationController?.popViewController(animated: true)
         }
     }

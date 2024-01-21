@@ -16,6 +16,7 @@ class UserDefaultsManager {
         case setting
         case nickname
         case searchList
+        case productID
     }
     
     let ud = UserDefaults.standard
@@ -35,12 +36,20 @@ class UserDefaultsManager {
             ud.setValue(newValue, forKey: UDKey.nickname.rawValue)
         }
     }
-    var searchList: [String] {
+    var searchList: [String]? {
         get {
-            ud.array(forKey: UDKey.searchList.rawValue) as! [String]
+            ud.array(forKey: UDKey.searchList.rawValue) as? [String]
         }
         set {
             ud.setValue(newValue, forKey: UDKey.searchList.rawValue)
+        }
+    }
+    var productID: [String]? {
+        get {
+            ud.array(forKey: UDKey.productID.rawValue) as? [String]
+        }
+        set {
+            ud.setValue(newValue, forKey: UDKey.productID.rawValue)
         }
     }
 }

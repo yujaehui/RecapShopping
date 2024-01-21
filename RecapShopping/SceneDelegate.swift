@@ -7,9 +7,28 @@
 
 import UIKit
 
+enum TabBarItem: CaseIterable {
+    case search
+    case setting
+    
+    var title: String {
+        switch self {
+        case .search: "검색"
+        case .setting: "설정"
+        }
+    }
+    var image: String {
+        switch self {
+        case .search: "magnifyingglass"
+        case .setting: "gearshape"
+        }
+    }
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var titleList = ["검색", "설정"]
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -32,6 +51,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let sb = UIStoryboard(name: "Search", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
+            vc.tabBar.backgroundColor = .background
+            vc.tabBar.tintColor = .point
+            vc.tabBar.barTintColor = .secondaryLabel
             window?.rootViewController = vc
             window?.makeKeyAndVisible() // 빼먹지 말 것 !!!
         }

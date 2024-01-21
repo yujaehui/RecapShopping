@@ -13,14 +13,19 @@ class SearchViewController: UIViewController {
     @IBOutlet var recentSearchLabel: UILabel!
     @IBOutlet var deleteAllButton: UIButton!
     @IBOutlet var emptyImageView: UIImageView!
+    @IBOutlet var emptyLabel: UILabel!
     @IBOutlet var recentSearchTableView: UITableView!
     
-    var recentSearchList: [String] = ["맥북", "지갑", "향수"]
+    var recentSearchList = UserDefaultsManager.shared.searchList ?? []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
         view.backgroundColor = .background
+        
+        
+        
         
         searchBar.searchTextField.textColor = .text
         
@@ -39,6 +44,11 @@ class SearchViewController: UIViewController {
         
         emptyImageView.image = UIImage(named: "empty")
         
+        emptyLabel.text = "최근 검색어가 없습니다"
+        emptyLabel.textColor = .text
+        emptyLabel.font = .boldSystemFont(ofSize: 18)
+        emptyLabel.textAlignment = .center
+        
         recentSearchTableView.backgroundColor = .background
         
         let xib = UINib(nibName: "RecentSearchTableViewCell", bundle: nil)
@@ -49,8 +59,23 @@ class SearchViewController: UIViewController {
         
         setNavigation()
         
+        print(recentSearchList)
+        if recentSearchList.isEmpty {
+            recentSearchLabel.text = ""
+            deleteAllButton.isHidden = true
+            recentSearchTableView.isHidden = true
+        }
+        deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
         
-        
+    }
+    
+    @objc func deleteAllButtonClicked() {
+        recentSearchList.removeAll()
+        UserDefaultsManager.shared.searchList = recentSearchList
+        recentSearchLabel.text = ""
+        deleteAllButton.isHidden = true
+        recentSearchTableView.isHidden = true
+        recentSearchTableView.reloadData()
     }
     
     func setNavigation() {
@@ -89,9 +114,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         let vc = sb.instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
         vc.searchText = text
         navigationController?.pushViewController(vc, animated: true)
+        
+        searchBar.text = ""
     }
-    
-    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -105,6 +130,11 @@ extension SearchViewController: UISearchBarDelegate {
         let vc = sb.instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
         vc.searchText = text
         navigationController?.pushViewController(vc, animated: true)
+        
+        searchBar.text = ""
+        recentSearchLabel.text = "최근 검색"
+        deleteAllButton.isHidden = false
+        recentSearchTableView.isHidden = false
 
     }
 }

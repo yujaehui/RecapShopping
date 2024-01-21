@@ -13,14 +13,18 @@ enum SettingCellType: Int {
 }
 
 class SettingViewController: UIViewController, ProfileViewControllerDelegate {
-    func willDissmiss() {
+    func willDismiss() {
         settingTableView.reloadData()
     }
-    
     
     @IBOutlet var settingTableView: UITableView!
     
     var settingList = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "회원 탈퇴"]
+    var count = 0 {
+        didSet {
+            settingTableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +40,16 @@ class SettingViewController: UIViewController, ProfileViewControllerDelegate {
         
         settingTableView.dataSource = self
         settingTableView.delegate = self
-        
+
         settingTableView.rowHeight = UITableView.automaticDimension
         
         setNavigation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        count = UserDefaultsManager.shared.productID?.count ?? 0999999
     }
     
     func setNavigation() {
@@ -48,7 +57,6 @@ class SettingViewController: UIViewController, ProfileViewControllerDelegate {
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
     }
-    
 }
 
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
@@ -76,7 +84,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             cell.nicknameLabel.text = nickname
             cell.nicknameLabel.textColor = .text
             cell.nicknameLabel.font = .boldSystemFont(ofSize: 18)
-            cell.likeStateLabel.text = "5게의 상품을 좋아하고 있어요!"
+            cell.likeStateLabel.text = "\(count)개의 상품을 좋아하고 있어요!"
             cell.likeStateLabel.textColor = .text
             cell.likeStateLabel.font = .boldSystemFont(ofSize: 16)
             return cell
