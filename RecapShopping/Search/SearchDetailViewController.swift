@@ -8,9 +8,6 @@
 import UIKit
 import WebKit
 
-
-
-
 class SearchDetailViewController: UIViewController {
     
     @IBOutlet var webView: WKWebView!
@@ -32,7 +29,6 @@ class SearchDetailViewController: UIViewController {
         }
         
         setNavigation()
-
     }
     
     func setNavigation() {
@@ -63,6 +59,5 @@ class SearchDetailViewController: UIViewController {
         }
         UserDefaultsManager.shared.productID = IDList
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: image)
-        
     }
 }

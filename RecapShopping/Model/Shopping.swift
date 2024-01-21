@@ -11,8 +11,20 @@ import Foundation
 struct Shopping: Codable {
     var lastBuildDate: String
     var total: Int
-    var start,  display: Int
+    var start, display: Int
     var items: [Item]
+    
+    init(lastBuildDate: String = "", 
+         total: Int = 0,
+         start: Int = 0,
+         display: Int = 0,
+         items: [Item] = []) {
+        self.lastBuildDate = lastBuildDate
+        self.total = total
+        self.start = start
+        self.display = display
+        self.items = items
+    }
 }
 
 // MARK: - Item

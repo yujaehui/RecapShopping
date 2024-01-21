@@ -10,10 +10,10 @@ import Alamofire
 import Kingfisher
 
 enum Sort: String {
-    case sim
-    case date
-    case asc
-    case dsc
+    case sim = "정확도순"
+    case date = "날짜순"
+    case asc = "가격높은순"
+    case dsc = "가격낮은순"
 }
 
 class SearchResultViewController: UIViewController {
@@ -23,14 +23,15 @@ class SearchResultViewController: UIViewController {
     @IBOutlet var dateButton: UIButton!
     @IBOutlet var expensiveButton: UIButton!
     @IBOutlet var cheapButton: UIButton!
+    
     @IBOutlet var resultCollectionView: UICollectionView!
     
     var searchText = ""
-    var shoppingList = Shopping(lastBuildDate: "", total: 0, start: 0, display: 0, items: [])
+    var shoppingList = Shopping()
     var total = 0
     var start = 1
     
-    var sort: String = "sim" {
+    var sort: Sort = .sim {
         didSet {
             resultCollectionView.reloadData()
         }
@@ -77,25 +78,26 @@ class SearchResultViewController: UIViewController {
     }
     
     @objc func sortButtonClicked(_ sender: UIButton) {
-        designButton(accuracyButton, title: "정확도순")
-        designButton(dateButton, title: "날짜순")
-        designButton(expensiveButton, title: "가격높은순")
-        designButton(cheapButton, title: "가격낮은순")
+        designButton(accuracyButton, title: Sort.sim.rawValue)
+        designButton(dateButton, title: Sort.date.rawValue)
+        designButton(expensiveButton, title: Sort.asc.rawValue)
+        designButton(cheapButton, title: Sort.dsc.rawValue)
         selectButton(sender)
         
         switch sender {
         case accuracyButton:
-            sort = Sort.sim.rawValue
+            sort = .sim
         case dateButton:
-            sort = Sort.date.rawValue
+            sort = .date
         case expensiveButton:
-            sort = Sort.dsc.rawValue
+            sort = .dsc
         case cheapButton:
-            sort = Sort.asc.rawValue
+            sort = .asc
         default:
             break
         }
         
+        start = 1
         callRequest()
     }
     
@@ -170,7 +172,6 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
         vc.name = removeHTMLTags(from: shoppingList.items[indexPath.row].title)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 extension SearchResultViewController {
@@ -257,6 +258,10 @@ extension SearchResultViewController {
                 self.resultCountLabel.text = "\(self.formatQuantity(self.total))개의 검색 결과"
                 
                 self.resultCollectionView.reloadData()
+                
+                if self.start == 1 {
+                    self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+                }
                 
             case .failure(let failure):
                 print(failure)

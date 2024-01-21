@@ -25,24 +25,37 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7CY-5q-9iP">
-                        <rect key="frame" x="57" y="16" width="319" height="21"/>
+                        <rect key="frame" x="57" y="16" width="278" height="25"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXq-Fe-4DY">
+                        <rect key="frame" x="351" y="16" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="9F9-16-DxT"/>
+                            <constraint firstAttribute="width" constant="25" id="WyR-9k-za0"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Yyb-ce-B8U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="9v7-HD-rlc"/>
                     <constraint firstItem="Yyb-ce-B8U" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="MPh-hl-by4"/>
                     <constraint firstAttribute="bottom" secondItem="Yyb-ce-B8U" secondAttribute="bottom" constant="16" id="O3V-zu-c6Z"/>
-                    <constraint firstAttribute="trailing" secondItem="7CY-5q-9iP" secondAttribute="trailing" constant="16" id="PlV-nl-Q6V"/>
+                    <constraint firstItem="QXq-Fe-4DY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="V0Y-7m-MIS"/>
+                    <constraint firstAttribute="bottom" secondItem="QXq-Fe-4DY" secondAttribute="bottom" constant="16" id="d0J-Ic-BXE"/>
                     <constraint firstItem="7CY-5q-9iP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="d2y-r2-z1g"/>
+                    <constraint firstItem="QXq-Fe-4DY" firstAttribute="leading" secondItem="7CY-5q-9iP" secondAttribute="trailing" constant="16" id="eTp-Aq-iJe"/>
+                    <constraint firstAttribute="trailing" secondItem="QXq-Fe-4DY" secondAttribute="trailing" constant="16" id="heg-qy-OnV"/>
                     <constraint firstItem="7CY-5q-9iP" firstAttribute="leading" secondItem="Yyb-ce-B8U" secondAttribute="trailing" constant="16" id="q1m-pd-60F"/>
                     <constraint firstAttribute="bottom" secondItem="7CY-5q-9iP" secondAttribute="bottom" constant="16" id="uyN-j7-Vh0"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="deleteButton" destination="QXq-Fe-4DY" id="iH0-Q3-buR"/>
                 <outlet property="magnifyingglassImageView" destination="Yyb-ce-B8U" id="lTA-Nr-8a9"/>
                 <outlet property="recentSearchLabel" destination="7CY-5q-9iP" id="fbx-LW-OKh"/>
             </connections>

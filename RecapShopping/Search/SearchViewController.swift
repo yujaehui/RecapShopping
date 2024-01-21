@@ -28,6 +28,17 @@ class SearchViewController: UIViewController {
         
     }
     
+    @objc func deleteButtonClicked(_ sender: UIButton) {
+        recentSearchList.remove(at: sender.tag)
+        UserDefaultsManager.shared.searchList = recentSearchList
+        if recentSearchList.isEmpty {
+            recentSearchLabel.text = ""
+            deleteAllButton.isHidden = true
+            recentSearchTableView.isHidden = true
+        }
+        recentSearchTableView.reloadData()
+    }
+    
     @objc func deleteAllButtonClicked() {
         recentSearchList.removeAll()
         UserDefaultsManager.shared.searchList = recentSearchList
@@ -98,6 +109,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: RecentSearchTableViewCell.identifier, for: indexPath) as! RecentSearchTableViewCell
         cell.recentSearchLabel.text = recentSearchList[indexPath.row]
+        cell.deleteButton.tag = indexPath.row
+        cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         return cell
     }
     
