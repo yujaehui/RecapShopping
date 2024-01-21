@@ -36,6 +36,7 @@
 		09191CFB2B5A53DF00E3FE7B /* SearchResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09191CF92B5A53DF00E3FE7B /* SearchResultCollectionViewCell.xib */; };
 		09191CFE2B5AA73C00E3FE7B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191CFD2B5AA73C00E3FE7B /* User.swift */; };
 		09191D002B5AAD6500E3FE7B /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191CFF2B5AAD6500E3FE7B /* UserDefaultsManager.swift */; };
+		09191D022B5CCBF300E3FE7B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 09191D012B5CCBF300E3FE7B /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		09191CF92B5A53DF00E3FE7B /* SearchResultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultCollectionViewCell.xib; sourceTree = "<group>"; };
 		09191CFD2B5AA73C00E3FE7B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		09191CFF2B5AAD6500E3FE7B /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		09191D012B5CCBF300E3FE7B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				09191CBC2B5A17A700E3FE7B /* Assets.xcassets */,
 				09191CBE2B5A17A700E3FE7B /* LaunchScreen.storyboard */,
 				09191CC12B5A17A700E3FE7B /* Info.plist */,
+				09191D012B5CCBF300E3FE7B /* .gitignore */,
 			);
 			path = RecapShopping;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				09191CEB2B5A4BBA00E3FE7B /* SettingTableViewCell.xib in Resources */,
 				09191CE32B5A422400E3FE7B /* ProfileTableViewCell.xib in Resources */,
 				09191CD02B5A1B5E00E3FE7B /* Search.storyboard in Resources */,
+				09191D022B5CCBF300E3FE7B /* .gitignore in Resources */,
 				09191CCC2B5A186900E3FE7B /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
