@@ -16,6 +16,8 @@ class SearchResultViewController: UIViewController {
     @IBOutlet var cheapButton: UIButton!
     @IBOutlet var resultCollectionView: UICollectionView!
     
+    var searchText = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,6 +50,10 @@ class SearchResultViewController: UIViewController {
         resultCollectionView.collectionViewLayout = layout
         
         
+        
+    }
+    
+    func callRequest() {
         
     }
     

@@ -15,6 +15,7 @@ class UserDefaultsManager {
     enum UDKey: String {
         case setting
         case nickname
+        case searchList
     }
     
     let ud = UserDefaults.standard
@@ -32,6 +33,14 @@ class UserDefaultsManager {
         }
         set {
             ud.setValue(newValue, forKey: UDKey.nickname.rawValue)
+        }
+    }
+    var searchList: [String] {
+        get {
+            ud.array(forKey: UDKey.searchList.rawValue) as! [String]
+        }
+        set {
+            ud.setValue(newValue, forKey: UDKey.searchList.rawValue)
         }
     }
 }

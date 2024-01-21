@@ -77,5 +77,34 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar.text = recentSearchList[indexPath.row]
+        guard let text = searchBar.text else { return }
+        recentSearchList.removeAll { $0 == text }
+        recentSearchList.insert(text, at: 0)
+        UserDefaultsManager.shared.searchList = recentSearchList
+        recentSearchTableView.reloadData()
+        
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
+        vc.searchText = text
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
+    
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else { return }
+        recentSearchList.insert(text, at: 0)
+        UserDefaultsManager.shared.searchList = recentSearchList
+        recentSearchTableView.reloadData()
+        
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SearchResultViewController") as! SearchResultViewController
+        vc.searchText = text
+        navigationController?.pushViewController(vc, animated: true)
+
+    }
 }
