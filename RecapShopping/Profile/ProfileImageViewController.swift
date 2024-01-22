@@ -85,6 +85,9 @@ extension ProfileImageViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as! ProfileImageCollectionViewCell
         cell.profileImageView.image = UIImage(named: "profile\(indexPath.row+1)")
+        DispatchQueue.main.async {
+            cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.height / 2
+        }
         // 내가 고른 이미지와 indexPath.row가 같으면 해당 이미지만 border 효과
         if userSelect == indexPath.row+1 {
             cell.profileImageView.layer.borderWidth = 4

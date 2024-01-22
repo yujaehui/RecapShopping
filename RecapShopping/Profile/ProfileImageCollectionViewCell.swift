@@ -15,7 +15,6 @@ class ProfileImageCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         profileImageView.contentMode = .scaleToFill
-        profileImageView.layer.cornerRadius = profileImageView.bounds.width / 4
         profileImageView.clipsToBounds = true
     }
 
