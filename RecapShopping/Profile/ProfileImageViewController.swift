@@ -96,7 +96,6 @@ extension ProfileImageViewController: UICollectionViewDataSource, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
         userSelect = indexPath.row + 1 // userSelect에 해당 이미지 번호를 넣어줌
         profileImageView.image = UIImage(named: "profile\(userSelect)")
         collectionView.reloadData()

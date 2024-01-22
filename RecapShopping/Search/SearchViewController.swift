@@ -28,6 +28,11 @@ class SearchViewController: UIViewController {
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            view.endEditing(true)
+        }
+
+    
     @objc func deleteButtonClicked(_ sender: UIButton) {
         recentSearchList.remove(at: sender.tag) // 해당 항목 삭제
         UserDefaultsManager.shared.searchList = recentSearchList
@@ -112,6 +117,10 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let text = searchBar.text, !text.isEmpty else { return }
         search(text: text)
     }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+        }
 }
 
 // MARK: SearchBar

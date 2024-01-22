@@ -16,6 +16,7 @@ class RecentSearchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         backgroundColor = .background
+        selectionStyle = .none
         
         magnifyingglassImageView.image = UIImage(systemName: "magnifyingglass")
         magnifyingglassImageView.tintColor = .text
