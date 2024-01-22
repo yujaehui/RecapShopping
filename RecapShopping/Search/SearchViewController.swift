@@ -109,14 +109,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchBar.text = recentSearchList[indexPath.row]
-        search()
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        search(text: text)
     }
 }
 
 // MARK: SearchBar
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        search()
+        guard let text = searchBar.text, !text.isEmpty else { return }
+        search(text: text)
     }
 }
 
@@ -136,8 +138,7 @@ extension SearchViewController {
     
     // 1. 최근 검색어 목록에 추가
     // 2. 해당 검색어 화면을 보여주는 화면으로 이동
-    func search() {
-        guard let text = searchBar.text else { return }
+    func search(text: String) {
         recentSearchList.removeAll { $0 == text } // 최근 검색어 목록에 해당 검색어와 같은 게 있는지 확인, 있다면 제거
         recentSearchList.insert(text, at: 0) // 이후 해당 검색어를 최근 검색어 목록 첫번째 항목에 추가
         if recentSearchList.count > 7 { // 최근 검색어 목록의 총 항목 수가 7개를 넘으면 가장 오래된 항목 제거
