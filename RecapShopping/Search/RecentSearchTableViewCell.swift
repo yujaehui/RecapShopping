@@ -16,10 +16,13 @@ class RecentSearchTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         backgroundColor = .background
+        
         magnifyingglassImageView.image = UIImage(systemName: "magnifyingglass")
         magnifyingglassImageView.tintColor = .text
+        
         recentSearchLabel.textColor = .text
         recentSearchLabel.font = FontStyle.tertiary
+        
         deleteButton.setTitle("", for: .normal)
         deleteButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         deleteButton.tintColor = .lightGray

@@ -37,10 +37,4 @@ class SearchResultCollectionViewCell: UICollectionViewCell {
         heartButton.layer.cornerRadius = heartButton.frame.width / 2
         heartButton.clipsToBounds = true
     }
-    
-    func configureCell(row: Item) {
-        let imageURL = URL(string: row.image)
-        productImageView.kf.setImage(with: imageURL)
-        brandLabel.text = row.brand
-    }
 }

@@ -47,6 +47,8 @@
 		09191D1D2B5D423D00E3FE7B /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D1C2B5D423D00E3FE7B /* FontStyle.swift */; };
 		09191D222B5D442100E3FE7B /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D212B5D442100E3FE7B /* UITextField+Extension.swift */; };
 		09191D242B5D4B1200E3FE7B /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D232B5D4B1200E3FE7B /* UIButton+Extension.swift */; };
+		09191D352B5E36EA00E3FE7B /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D342B5E36EA00E3FE7B /* UITableView+Extension.swift */; };
+		09191D372B5E370D00E3FE7B /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09191D362B5E370D00E3FE7B /* UICollectionView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		09191D1C2B5D423D00E3FE7B /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		09191D212B5D442100E3FE7B /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		09191D232B5D4B1200E3FE7B /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		09191D342B5E36EA00E3FE7B /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		09191D362B5E370D00E3FE7B /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,7 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				09191D122B5D3D7100E3FE7B /* UIViewController+Extension.swift */,
+				09191D342B5E36EA00E3FE7B /* UITableView+Extension.swift */,
 				09191D142B5D3D8000E3FE7B /* UITableViewCell+Extension.swift */,
+				09191D362B5E370D00E3FE7B /* UICollectionView+Extension.swift */,
 				09191D162B5D3D8C00E3FE7B /* UICollectionViewCell+Extension.swift */,
 				09191D182B5D420400E3FE7B /* UIImageView+Extension.swift */,
 				09191D212B5D442100E3FE7B /* UITextField+Extension.swift */,
@@ -337,6 +343,8 @@
 				09191D222B5D442100E3FE7B /* UITextField+Extension.swift in Sources */,
 				09191D042B5CCC2F00E3FE7B /* APIKey.swift in Sources */,
 				09191CD52B5A20E700E3FE7B /* OnboardingViewController.swift in Sources */,
+				09191D372B5E370D00E3FE7B /* UICollectionView+Extension.swift in Sources */,
+				09191D352B5E36EA00E3FE7B /* UITableView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,6 +499,7 @@
 				DEVELOPMENT_TEAM = NLBNZ4T579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RecapShopping/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "유재희";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -523,6 +532,7 @@
 				DEVELOPMENT_TEAM = NLBNZ4T579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RecapShopping/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "유재희";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

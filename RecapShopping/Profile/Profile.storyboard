@@ -33,6 +33,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="textFieldChanged:" destination="Y6W-OH-hqX" eventType="editingChanged" id="scl-NN-hFu"/>
+                                    <action selector="textFieldState:" destination="Y6W-OH-hqX" eventType="editingDidBegin" id="N6v-IY-nhC"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2M-Fy-3KW">

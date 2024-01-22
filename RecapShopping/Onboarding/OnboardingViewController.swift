@@ -16,11 +16,8 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .background
+        configureUI()
         
-        sesacShoppingImageView.image = UIImage(named: "sesacShopping")
-        onboardingImageView.image = UIImage(named: "onboarding")
-        startButton.greenButton("시작하기")
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
     }
     
@@ -29,5 +26,15 @@ class OnboardingViewController: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.identifier) as! ProfileViewController
         vc.accessType = .setting
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+// MARK: configureUI
+extension OnboardingViewController {
+    func configureUI() {
+        setViewBackgroundColor()
+        sesacShoppingImageView.image = UIImage(named: "sesacShopping")
+        onboardingImageView.image = UIImage(named: "onboarding")
+        startButton.greenButton("시작하기")
     }
 }

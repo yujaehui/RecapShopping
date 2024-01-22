@@ -20,29 +20,14 @@ class SearchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .background
+        setNavigation()
+        setViewBackgroundColor()
         
         let link = "https://msearch.shopping.naver.com/product/\(id)"
         if let url = URL(string: link) {
             let request = URLRequest(url: url)
             webView.load(request)
         }
-        
-        setNavigation()
-    }
-    
-    func setNavigation() {
-        navigationItem.title = name
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
-        navigationController?.navigationBar.tintColor = .text
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
-        if IDList.contains(id) {
-            image = "heart.fill"
-        } else {
-            image = "heart"
-        }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: image), style: .plain, target: self, action: #selector(heartButtonClicked))
     }
     
     @objc func cancelButtonClicked() {
@@ -59,5 +44,22 @@ class SearchDetailViewController: UIViewController {
         }
         UserDefaultsManager.shared.productID = IDList
         navigationItem.rightBarButtonItem?.image = UIImage(systemName: image)
+    }
+}
+
+// MARK: setNavigaiton
+extension SearchDetailViewController {
+    func setNavigation() {
+        navigationItem.title = name
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+        navigationController?.navigationBar.tintColor = .text
+        navigationItem.backBarButtonItem?.isEnabled = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
+        if IDList.contains(id) {
+            image = "heart.fill"
+        } else {
+            image = "heart"
+        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: image), style: .plain, target: self, action: #selector(heartButtonClicked))
     }
 }

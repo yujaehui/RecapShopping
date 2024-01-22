@@ -57,7 +57,7 @@
                             <constraint firstAttribute="width" constant="40" id="t7t-ZJ-fx2"/>
                         </constraints>
                         <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title=""/>
                     </button>
                 </subviews>
             </view>

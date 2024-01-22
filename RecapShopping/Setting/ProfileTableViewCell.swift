@@ -21,11 +21,9 @@ class ProfileTableViewCell: UITableViewCell {
         
         profileImageView.configureProfileImageView()
         
-        let nickname = UserDefaultsManager.shared.nickname
-        nicknameLabel.text = nickname
         nicknameLabel.textColor = .text
         nicknameLabel.font = FontStyle.primary
-        
+    
         likeStateLabel.textColor = .text
         likeStateLabel.font = FontStyle.secondary
     }

@@ -12,8 +12,8 @@ import Kingfisher
 enum Sort: String {
     case sim = "정확도순"
     case date = "날짜순"
-    case asc = "가격높은순"
-    case dsc = "가격낮은순"
+    case asc = "가격낮은순"
+    case dsc = "가격높은순"
 }
 
 class SearchResultViewController: UIViewController {
@@ -23,10 +23,10 @@ class SearchResultViewController: UIViewController {
     @IBOutlet var dateButton: UIButton!
     @IBOutlet var expensiveButton: UIButton!
     @IBOutlet var cheapButton: UIButton!
-    
     @IBOutlet var resultCollectionView: UICollectionView!
+    @IBOutlet var emptyLabel: UILabel!
     
-    var searchText = ""
+    var searchText = "" // 값 전달 받을 공간
     var shoppingList = Shopping()
     var total = 0
     var start = 1
@@ -42,25 +42,15 @@ class SearchResultViewController: UIViewController {
         }
     }
 
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .background
-        resultCollectionView.backgroundColor = .background
 
-        resultCountLabel.textColor = .point
-        resultCountLabel.font = FontStyle.tertiary
-        
-        designButton(accuracyButton, title: "정확도순")
-        designButton(dateButton, title: "날짜순")
-        designButton(expensiveButton, title: "가격높은순")
-        designButton(cheapButton, title: "가격낮은순")
-        selectButton(accuracyButton)
-
-        callRequest()
-        configureCollectionView()
         setNavigation()
-        
+        configureUI()
+        configureCollectionView()
+        callRequest()
+
         accuracyButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
         dateButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
         expensiveButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
@@ -68,6 +58,7 @@ class SearchResultViewController: UIViewController {
         
     }
     
+    // MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         IDList = UserDefaultsManager.shared.productID ?? []
@@ -82,98 +73,85 @@ class SearchResultViewController: UIViewController {
         designButton(dateButton, title: Sort.date.rawValue)
         designButton(expensiveButton, title: Sort.asc.rawValue)
         designButton(cheapButton, title: Sort.dsc.rawValue)
-        selectButton(sender)
+        designSelectButton(sender)
         
         switch sender {
         case accuracyButton:
             sort = .sim
         case dateButton:
             sort = .date
-        case expensiveButton:
-            sort = .dsc
         case cheapButton:
             sort = .asc
+        case expensiveButton:
+            sort = .dsc
         default:
             break
         }
-        
+
         start = 1
         callRequest()
     }
     
     @objc func heartButtonClicked(_ sender: UIButton) {
-        if IDList.contains(shoppingList.items[sender.tag].productID) {
-            IDList.removeAll { id in
-                id == shoppingList.items[sender.tag].productID
-            }
+        if IDList.contains(shoppingList.items[sender.tag].productID) { // IDList가 sender의 productID를 가지고 있다면
+            IDList.removeAll { $0 == shoppingList.items[sender.tag].productID } // 해당 productID를 IDList에서 제거
         } else {
-            IDList.append(shoppingList.items[sender.tag].productID)
+            IDList.append(shoppingList.items[sender.tag].productID) // 그게 아니라면 productID를 IDList에 추가
         }
-        UserDefaultsManager.shared.productID = IDList
+        UserDefaultsManager.shared.productID = IDList //이후 IDList를 저장소에 저장
         resultCollectionView.reloadData()
     }
-    
-    func formatCurrency(_ amountString: String) -> String? {
-        guard let amount = Int(amountString) else {
-            return nil // 유효한 정수로 변환할 수 없는 경우 nil 반환
-        }
+}
 
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.locale = Locale.current // 현재 지역에 따른 통화 포맷을 사용합니다.
-
-        // 정수를 NSNumber로 변환한 후 통화 포맷으로 문자열을 생성합니다.
-        if let formattedAmount = formatter.string(from: NSNumber(value: amount)) {
-            return formattedAmount
-        } else {
-            return "\(amount)"
-        }
-    }
-    
-    func formatQuantity(_ count: Int) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.locale = Locale.current // 현재 지역에 따른 포맷을 사용합니다.
-
-        // 정수를 NSNumber로 변환한 후 천 단위로 구분된 문자열로 생성합니다.
-        if let formattedCount = formatter.string(from: NSNumber(value: count)) {
-            return formattedCount
-        } else {
-            return "\(count)"
-        }
+// MARK: setNavigation
+extension SearchResultViewController {
+    func setNavigation() {
+        navigationItem.title = searchText // 전달받은 값을 네비게이션 타이틀로 설정
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
+        navigationController?.navigationBar.tintColor = .text
+        navigationItem.backBarButtonItem?.isEnabled = true
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
     }
 }
 
-extension SearchResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shoppingList.items.count
+// MARK: configureUI
+extension SearchResultViewController {
+    func configureUI() {
+        setViewBackgroundColor()
+        resultCollectionView.setCollectionViewBackgroundColor()
+
+        resultCountLabel.textColor = .point
+        resultCountLabel.font = FontStyle.tertiary
+        
+        designButton(accuracyButton, title: "정확도순")
+        designButton(dateButton, title: "날짜순")
+        designButton(expensiveButton, title: "가격높은순")
+        designButton(cheapButton, title: "가격낮은순")
+        designSelectButton(accuracyButton)
+        
+        emptyLabel.text = "상품을 찾을 수 없습니다"
+        emptyLabel.textColor = .text
+        emptyLabel.textAlignment = .center
+        emptyLabel.font = FontStyle.primary
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
-        let row = shoppingList.items[indexPath.row]
-        cell.configureCell(row: row)
-        cell.productNameLabel.text = removeHTMLTags(from: row.title)
-        cell.priceLabel.text = formatCurrency(row.lprice)
-        if IDList.contains(shoppingList.items[indexPath.row].productID) {
-            cell.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-            cell.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
-        cell.heartButton.tag = indexPath.row
-        cell.heartButton.addTarget(self, action: #selector(heartButtonClicked), for: .touchUpInside)
-        return cell
+    func designButton(_ button: UIButton, title: String) {
+        button.setTitle(title, for: .normal)
+        button.tintColor = .text
+        button.backgroundColor = .background
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let sb = UIStoryboard(name: "Search", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: SearchDetailViewController.identifier) as! SearchDetailViewController
-        vc.id = shoppingList.items[indexPath.row].productID
-        vc.name = removeHTMLTags(from: shoppingList.items[indexPath.row].title)
-        navigationController?.pushViewController(vc, animated: true)
+    func designSelectButton(_ button: UIButton) { // 버튼이 눌렸을 경우 디자인 변경
+        button.tintColor = .background
+        button.backgroundColor = .text
+        button.layer.cornerRadius = 10
     }
 }
 
+// MARK: configureCollectionView
 extension SearchResultViewController {
     func configureCollectionView() {
         let xib = UINib(nibName: SearchResultCollectionViewCell.identifier, bundle: nil)
@@ -194,6 +172,71 @@ extension SearchResultViewController {
     }
 }
 
+// MARK: collectionView - DataSource, Delegate
+extension SearchResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return shoppingList.items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+        let row = shoppingList.items[indexPath.row]
+        let imageURL = URL(string: row.image)
+        cell.productImageView.kf.setImage(with: imageURL)
+        cell.brandLabel.text = row.brand
+        cell.productNameLabel.text = removeHTMLTags(from: row.title)
+        cell.priceLabel.text = formatCurrency(row.lprice)
+        if IDList.contains(row.productID) { // productID가 IDList 안에 있다면
+            cell.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) // 채워진 하트로 표시
+        } else { // 아니라면
+            cell.heartButton.setImage(UIImage(systemName: "heart"), for: .normal) // 비워진 하트로 표시
+        }
+        cell.heartButton.tag = indexPath.row
+        cell.heartButton.addTarget(self, action: #selector(heartButtonClicked), for: .touchUpInside)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: SearchDetailViewController.identifier) as! SearchDetailViewController
+        vc.id = shoppingList.items[indexPath.row].productID
+        vc.name = removeHTMLTags(from: shoppingList.items[indexPath.row].title)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // HTML 제거
+    func removeHTMLTags(from string: String) -> String {
+        do {
+            let regex = try NSRegularExpression(pattern: "<[^>]+>", options: [])
+            let range = NSRange(location: 0, length: string.utf16.count)
+            let withoutHTML = regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: "")
+            return withoutHTML
+        } catch {
+            print("Error removing HTML tags: \(error.localizedDescription)")
+            return string
+        }
+    }
+    
+    // String -> Number
+    func formatCurrency(_ amountString: String) -> String? {
+        guard let amount = Int(amountString) else {
+            return nil
+        }
+
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current
+
+        if let formattedAmount = formatter.string(from: NSNumber(value: amount)) {
+            return formattedAmount
+        } else {
+            return "\(amount)"
+        }
+    }
+}
+
+
+// MARK: collectionView - DataSourcePrefetching
 extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
@@ -208,33 +251,7 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
     }
 }
 
-extension SearchResultViewController {
-    func setNavigation() {
-        navigationItem.title = searchText
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
-        navigationController?.navigationBar.tintColor = .text
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
-    }
-}
-
-extension SearchResultViewController {
-    func designButton(_ button: UIButton, title: String) {
-        button.setTitle(title, for: .normal)
-        button.tintColor = .text
-        button.backgroundColor = .background
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 1)
-    }
-    
-    func selectButton(_ button: UIButton) {
-        button.tintColor = .background
-        button.backgroundColor = .text
-        button.layer.cornerRadius = 10
-    }
-}
-
+// MARK: callRequest
 extension SearchResultViewController {
     func callRequest() {
         let query = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -247,19 +264,23 @@ extension SearchResultViewController {
         AF.request(url, method: .get, headers: headers).responseDecodable(of: Shopping.self) { response in
             switch response.result {
             case .success(let success):
-                if self.start == 1 {
+                
+                self.total = success.total
+                
+                if self.total == 0 {
+                    self.showEmptyState()
+                } else if self.start == 1 {
                     self.shoppingList = success
                 } else {
                     self.shoppingList.items.append(contentsOf: success.items)
                 }
                 
-                self.total = success.total
-                //self.resultCountLabel.text = "\(self.total)개의 검색 결과"
                 self.resultCountLabel.text = "\(self.formatQuantity(self.total))개의 검색 결과"
                 
                 self.resultCollectionView.reloadData()
                 
-                if self.start == 1 {
+                // total이 0보다 크다는 조건을 두지 않으면 런타임 오류 !
+                if self.start == 1 && self.total > 0 {
                     self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 }
                 
@@ -268,18 +289,28 @@ extension SearchResultViewController {
             }
         }
     }
-}
+    
+    // 검색 결과가 없을 때의 UI 처리
+    func showEmptyState() {
+        resultCountLabel.isHidden = true
+        resultCollectionView.isHidden = true
+        accuracyButton.isHidden = true
+        dateButton.isHidden = true
+        expensiveButton.isHidden = true
+        cheapButton.isHidden = true
+        emptyLabel.isHidden = false
+    }
+    
+    // Int -> Number
+    func formatQuantity(_ count: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale.current
 
-extension SearchResultViewController {
-    func removeHTMLTags(from string: String) -> String {
-        do {
-            let regex = try NSRegularExpression(pattern: "<[^>]+>", options: [])
-            let range = NSRange(location: 0, length: string.utf16.count)
-            let withoutHTML = regex.stringByReplacingMatches(in: string, options: [], range: range, withTemplate: "")
-            return withoutHTML
-        } catch {
-            print("Error removing HTML tags: \(error.localizedDescription)")
-            return string
+        if let formattedCount = formatter.string(from: NSNumber(value: count)) {
+            return formattedCount
+        } else {
+            return "\(count)"
         }
     }
 }

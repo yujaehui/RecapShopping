@@ -108,13 +108,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TuV-e3-wjU">
-                                <rect key="frame" x="16" y="103" width="361" height="21"/>
+                                <rect key="frame" x="16" y="59" width="361" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOK-Io-hMr">
+                                <rect key="frame" x="96.666666666666686" y="413.66666666666669" width="200" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="1vW-GM-dvU"/>
+                                    <constraint firstAttribute="width" constant="200" id="VwZ-V3-dkn"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3M7-zL-8Jn">
-                                <rect key="frame" x="16" y="132" width="21" height="35"/>
+                                <rect key="frame" x="16" y="88" width="21" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="8Qt-o0-oVk"/>
                                 </constraints>
@@ -123,7 +133,7 @@
                                 <state key="normal" title="ㅎ"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nd1-bh-olD">
-                                <rect key="frame" x="45" y="132" width="54" height="35"/>
+                                <rect key="frame" x="45" y="88" width="54" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="c5M-sD-KER"/>
                                 </constraints>
@@ -132,7 +142,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8GW-lY-HnO">
-                                <rect key="frame" x="107" y="132" width="54" height="35"/>
+                                <rect key="frame" x="107" y="88" width="54" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="8k8-kj-2xY"/>
                                 </constraints>
@@ -141,7 +151,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YsD-9M-uv3">
-                                <rect key="frame" x="169" y="132" width="54" height="35"/>
+                                <rect key="frame" x="169" y="88" width="54" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Ca6-Yj-UEn"/>
                                 </constraints>
@@ -150,7 +160,7 @@
                                 <state key="normal" title="Button"/>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lZd-ek-hbl">
-                                <rect key="frame" x="0.0" y="183" width="393" height="635"/>
+                                <rect key="frame" x="0.0" y="139" width="393" height="679"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7zz-4E-fmg">
                                     <size key="itemSize" width="128" height="128"/>
@@ -178,6 +188,7 @@
                             <constraint firstItem="3in-oi-XAG" firstAttribute="trailing" secondItem="lZd-ek-hbl" secondAttribute="trailing" id="EJR-9h-bs9"/>
                             <constraint firstItem="YsD-9M-uv3" firstAttribute="leading" secondItem="8GW-lY-HnO" secondAttribute="trailing" constant="8" id="PA5-Fj-3iJ"/>
                             <constraint firstItem="8GW-lY-HnO" firstAttribute="leading" secondItem="nd1-bh-olD" secondAttribute="trailing" constant="8" id="QuL-cs-GG7"/>
+                            <constraint firstItem="rOK-Io-hMr" firstAttribute="centerX" secondItem="dcK-PL-zA3" secondAttribute="centerX" id="T8u-97-z4u"/>
                             <constraint firstItem="nd1-bh-olD" firstAttribute="leading" secondItem="3M7-zL-8Jn" secondAttribute="trailing" constant="8" id="XDO-o0-FA5"/>
                             <constraint firstItem="lZd-ek-hbl" firstAttribute="leading" secondItem="3in-oi-XAG" secondAttribute="leading" id="aus-An-fPm"/>
                             <constraint firstItem="3M7-zL-8Jn" firstAttribute="leading" secondItem="3in-oi-XAG" secondAttribute="leading" constant="16" id="fAH-Zh-Cb0"/>
@@ -187,6 +198,7 @@
                             <constraint firstItem="3in-oi-XAG" firstAttribute="trailing" secondItem="TuV-e3-wjU" secondAttribute="trailing" constant="16" id="o2f-UE-Dk3"/>
                             <constraint firstItem="TuV-e3-wjU" firstAttribute="leading" secondItem="3in-oi-XAG" secondAttribute="leading" constant="16" id="oSF-99-F3U"/>
                             <constraint firstItem="TuV-e3-wjU" firstAttribute="top" secondItem="3in-oi-XAG" secondAttribute="top" id="p20-nH-3tR"/>
+                            <constraint firstItem="rOK-Io-hMr" firstAttribute="centerY" secondItem="dcK-PL-zA3" secondAttribute="centerY" id="xs4-Gl-qhb"/>
                             <constraint firstItem="lZd-ek-hbl" firstAttribute="top" secondItem="nd1-bh-olD" secondAttribute="bottom" constant="16" id="ytt-5u-hNk"/>
                         </constraints>
                     </view>
@@ -195,6 +207,7 @@
                         <outlet property="accuracyButton" destination="3M7-zL-8Jn" id="pPg-KM-WEX"/>
                         <outlet property="cheapButton" destination="YsD-9M-uv3" id="7Zf-Bn-T1Z"/>
                         <outlet property="dateButton" destination="nd1-bh-olD" id="QFU-xl-cg1"/>
+                        <outlet property="emptyLabel" destination="rOK-Io-hMr" id="xeC-2I-pIO"/>
                         <outlet property="expensiveButton" destination="8GW-lY-HnO" id="77f-Hb-Smb"/>
                         <outlet property="resultCollectionView" destination="lZd-ek-hbl" id="VWu-F4-dji"/>
                         <outlet property="resultCountLabel" destination="TuV-e3-wjU" id="m5m-TJ-Rms"/>
@@ -213,7 +226,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SRS-pM-Gth">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -257,42 +270,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3YZ-Ja-spt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1011.4503816793892" y="-27.464788732394368"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="9HJ-Yt-s0j">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pAZ-uG-vgK" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jEM-0j-cMu">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="YXb-sT-yGo" kind="relationship" relationship="rootViewController" id="tid-mU-amC"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QMk-mA-m1l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1011" y="679"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4Ux-YG-Zt9">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8N9-KZ-Nm6" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z7L-Lv-v1X">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="d5T-8S-cBf" kind="relationship" relationship="rootViewController" id="SX5-zS-0dp"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xgH-Cg-n5t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1011" y="1398"/>
         </scene>
         <!--Setting-->
         <scene sceneID="Vp3-zH-LMB">
