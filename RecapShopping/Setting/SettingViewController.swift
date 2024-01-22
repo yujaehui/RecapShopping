@@ -16,7 +16,7 @@ class SettingViewController: UIViewController {
     
     @IBOutlet var settingTableView: UITableView!
     
-    var settingList = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "회원 탈퇴"]
+    var settingList = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "처음부터 시작하기"]
     var count = 0 {
         didSet {
             settingTableView.reloadData()
@@ -120,9 +120,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             vc.accessType = .edit
             navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.section == SettingCellType.setting.rawValue && indexPath.row == 4 {
-            let alert = UIAlertController(title: "회원 탈퇴", message: "이 작업은 되돌릴 수 없습니다.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "처음부터 시작하기", message: "데이터를 모두 초기화하시겠습니까?", preferredStyle: .alert)
             let cancelButton = UIAlertAction(title: "취소", style: .cancel)
-            let secessionButton = UIAlertAction(title: "탈퇴", style: .destructive) { alert in
+            let secessionButton = UIAlertAction(title: "확인", style: .destructive) { alert in
                 // 모든 userDefaults 항목 제거
                 for key in UserDefaults.standard.dictionaryRepresentation().keys {
                     UserDefaults.standard.removeObject(forKey: key.description)

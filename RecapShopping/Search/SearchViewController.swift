@@ -51,7 +51,7 @@ class SearchViewController: UIViewController {
 // MARK: setNavigation
 extension SearchViewController {
     func setNavigation() {
-        navigationItem.title = "\(UserDefaultsManager.shared.nickname)의 쇼핑"
+        navigationItem.title = "\(UserDefaultsManager.shared.nickname)의 새싹쇼핑"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
     }
@@ -78,7 +78,7 @@ extension SearchViewController {
         
         emptyImageView.image = UIImage(named: "empty")
         
-        emptyLabel.text = "최근 검색어가 없습니다"
+        emptyLabel.text = "최근 검색어가 없어요"
         emptyLabel.textColor = .text
         emptyLabel.font = FontStyle.primary
         emptyLabel.textAlignment = .center

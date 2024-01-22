@@ -52,13 +52,13 @@ class ProfileViewController: UIViewController {
         let forbiddenCharacters = ["@", "#", "$", "%"]
         let forbiddenNumbers = ["0","1","2","3","4","5","6","7","8","9"]
         if text.count < 2 || text.count > 10 {
-            stateTextField("닉네임은 2글자 이상, 10글자 이내만 가능합니다.", color: .systemRed, isEnabled: false)
+            stateTextField("닉네임은 2글자 이상, 10글자 이내로 설정해주세요.", color: .systemRed, isEnabled: false)
         } else if forbiddenCharacters.contains(where: { text.contains($0) }) {
-            stateTextField("닉네임에 @, #, $, %를 입력할 수 없습니다.", color: .systemRed, isEnabled: false)
+            stateTextField("닉네임에 @, #, $, %를 입력할 수 없어요.", color: .systemRed, isEnabled: false)
         } else if forbiddenNumbers.contains(where: { text.contains($0) }) {
-            stateTextField("닉네임에 숫자는 입력할 수 없습니다.", color: .systemRed, isEnabled: false)
+            stateTextField("닉네임에 숫자는 입력할 수 없어요.", color: .systemRed, isEnabled: false)
         } else {
-            stateTextField("사용가능한 닉네임입니다.", color: .point, isEnabled: true)
+            stateTextField("사용할 수 있는 닉네임이에요.", color: .point, isEnabled: true)
         }
     }
     

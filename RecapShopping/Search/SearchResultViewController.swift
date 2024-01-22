@@ -129,7 +129,7 @@ extension SearchResultViewController {
         designButton(cheapButton, title: "가격낮은순")
         designSelectButton(accuracyButton)
         
-        emptyLabel.text = "상품을 찾을 수 없습니다"
+        emptyLabel.text = "상품을 찾을 수 없어요"
         emptyLabel.textColor = .text
         emptyLabel.textAlignment = .center
         emptyLabel.font = FontStyle.primary
