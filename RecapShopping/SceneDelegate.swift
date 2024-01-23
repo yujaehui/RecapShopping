@@ -7,24 +7,6 @@
 
 import UIKit
 
-enum TabBarItem: CaseIterable {
-    case search
-    case setting
-    
-    var title: String {
-        switch self {
-        case .search: "검색"
-        case .setting: "설정"
-        }
-    }
-    var image: String {
-        switch self {
-        case .search: "magnifyingglass"
-        case .setting: "gearshape"
-        }
-    }
-}
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?

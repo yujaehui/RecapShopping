@@ -13,6 +13,8 @@ class OnboardingViewController: UIViewController {
     @IBOutlet var onboardingImageView: UIImageView!
     @IBOutlet var startButton: UIButton!
     
+    var count = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

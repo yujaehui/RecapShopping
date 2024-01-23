@@ -134,7 +134,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 sceneDelegate?.window?.rootViewController = nav
                 sceneDelegate?.window?.makeKeyAndVisible()
             }
-        }
+        } 
     }
 }
 

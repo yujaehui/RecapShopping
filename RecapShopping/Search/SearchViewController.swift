@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
     
         configureUI()
         configureTableView()
+        notification()
         
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
     }
@@ -172,6 +173,19 @@ extension SearchViewController {
         recentSearchListIsEmpty()
         // 만약 검색 이전에 최근 검색어가 하나도 없었다면 최근 검색어 목록 테이블뷰가 보이지 않을 것임
         // 그래서 다시 검색을 했을 때 최근 검색어 목록 테이블뷰를 보여줘야 함
+    }
+    
+    // 알림 설정 관련
+    func notification() {
+        let content = UNMutableNotificationContent()
+        content.title = "지금 쇼핑 어때요?"
+        content.body = "당신이 원하는 그 상품이 할인 중일지도 몰라요🤫"
+        // let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false) // 시간에 따라
+        var component = DateComponents()
+        component.hour = 3 // 3시간에 1번씩 ㅎㅎ
+        let calenderTrigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: false) // 날짜에 따라
+        let request = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: calenderTrigger)
+        UNUserNotificationCenter.current().add(request)
     }
 }
 

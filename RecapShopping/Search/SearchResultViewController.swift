@@ -254,17 +254,10 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
 // MARK: callRequest
 extension SearchResultViewController {
     func callRequest() {
-        let query = searchText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(query)&display=20&start=\(start)&sort=\(sort)"
-        let headers: HTTPHeaders = [
-            "X-Naver-Client-Id": APIKey.clientID,
-            "X-Naver-Client-Secret": APIKey.clientSecret
-        ]
-        
-        AF.request(url, method: .get, headers: headers).responseDecodable(of: Shopping.self) { response in
-            switch response.result {
+        SearchAPIManager.shared.callRequest(text: searchText, start: start, sort: sort) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
             case .success(let success):
-                
                 self.total = success.total
                 
                 if self.total == 0 {
