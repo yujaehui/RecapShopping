@@ -12,8 +12,8 @@ import Kingfisher
 enum Sort: String {
     case sim = "정확도순"
     case date = "날짜순"
-    case asc = "가격낮은순"
     case dsc = "가격높은순"
+    case asc = "가격낮은순"
 }
 
 class SearchResultViewController: UIViewController {
@@ -71,8 +71,8 @@ class SearchResultViewController: UIViewController {
     @objc func sortButtonClicked(_ sender: UIButton) {
         designButton(accuracyButton, title: Sort.sim.rawValue)
         designButton(dateButton, title: Sort.date.rawValue)
-        designButton(expensiveButton, title: Sort.asc.rawValue)
-        designButton(cheapButton, title: Sort.dsc.rawValue)
+        designButton(expensiveButton, title: Sort.dsc.rawValue)
+        designButton(cheapButton, title: Sort.asc.rawValue)
         designSelectButton(sender)
         
         switch sender {
@@ -80,10 +80,10 @@ class SearchResultViewController: UIViewController {
             sort = .sim
         case dateButton:
             sort = .date
-        case cheapButton:
-            sort = .asc
         case expensiveButton:
             sort = .dsc
+        case cheapButton:
+            sort = .asc
         default:
             break
         }

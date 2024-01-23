@@ -17,15 +17,22 @@ class SearchViewController: UIViewController {
     @IBOutlet var recentSearchTableView: UITableView!
     
     var recentSearchList = UserDefaultsManager.shared.searchList ?? []
+    var nickname: String = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        setNavigation()
         configureUI()
         configureTableView()
         
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        nickname = UserDefaultsManager.shared.nickname
+        setNavigation() // navigaiton의 title이 바뀌어야 해서 viewWillAppear에...
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -51,7 +58,7 @@ class SearchViewController: UIViewController {
 // MARK: setNavigation
 extension SearchViewController {
     func setNavigation() {
-        navigationItem.title = "\(UserDefaultsManager.shared.nickname)의 새싹쇼핑"
+        navigationItem.title = "\(nickname)의 새싹쇼핑"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
     }

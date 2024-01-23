@@ -15,6 +15,5 @@ extension UITextField {
         border.frame = CGRect(x: 0, y: self.frame.height, width: viewSize-48, height: width)
         border.borderWidth = width
         self.layer.addSublayer(border)
-        
     }
 }
