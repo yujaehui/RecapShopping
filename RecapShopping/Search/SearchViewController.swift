@@ -25,7 +25,6 @@ class SearchViewController: UIViewController {
     
         configureUI()
         configureTableView()
-        notification()
         
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
     }
