@@ -20,6 +20,19 @@ class SearchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.text]
+        appearance.backgroundColor = .background
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
+        let tapApperance = UITabBarAppearance()
+        tapApperance.configureWithOpaqueBackground()
+        tapApperance.backgroundColor = .background
+        tabBarController?.tabBar.standardAppearance = tapApperance
+        tabBarController?.tabBar.scrollEdgeAppearance = tabBarController?.tabBar.standardAppearance
+        
         setNavigation()
         setViewBackgroundColor()
         
@@ -28,10 +41,6 @@ class SearchDetailViewController: UIViewController {
             let request = URLRequest(url: url)
             webView.load(request)
         }
-    }
-    
-    @objc func cancelButtonClicked() {
-        navigationController?.popViewController(animated: true)
     }
     
     @objc func heartButtonClicked(_ sender: UIButton) {
@@ -51,10 +60,7 @@ class SearchDetailViewController: UIViewController {
 extension SearchDetailViewController {
     func setNavigation() {
         navigationItem.title = name
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
         if IDList.contains(id) {
             image = "heart.fill"
         } else {

@@ -64,10 +64,6 @@ class SearchResultViewController: UIViewController {
         IDList = UserDefaultsManager.shared.productID ?? []
     }
     
-    @objc func cancelButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     @objc func sortButtonClicked(_ sender: UIButton) {
         designButton(accuracyButton, title: Sort.sim.rawValue)
         designButton(dateButton, title: Sort.date.rawValue)
@@ -109,8 +105,7 @@ extension SearchResultViewController {
         navigationItem.title = searchText // 전달받은 값을 네비게이션 타이틀로 설정
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
+        navigationItem.backButtonTitle = ""
     }
 }
 

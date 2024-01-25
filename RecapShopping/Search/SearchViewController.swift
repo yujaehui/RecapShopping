@@ -61,6 +61,7 @@ extension SearchViewController {
         navigationItem.title = "\(nickname)의 새싹쇼핑"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
+        navigationItem.backButtonTitle = ""
     }
 }
 

@@ -28,9 +28,9 @@ class ProfileImageViewController: UIViewController {
         configureCollectionView()
     }
     
-    @objc func cancelButtonClicked() {
-        UserDefaultsManager.shared.profileImage = userSelect // userSelect 저장 - 그렇다면 userSelect는?
-        navigationController?.popViewController(animated: true)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaultsManager.shared.profileImage = userSelect
     }
 }
 
@@ -40,8 +40,6 @@ extension ProfileImageViewController {
         navigationItem.title = type == .setting ? "프로필 설정" : "프로필 수정"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
     }
 }
 

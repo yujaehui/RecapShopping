@@ -49,6 +49,7 @@ extension SettingViewController {
         navigationItem.title = "설정"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
+        navigationItem.backButtonTitle = ""
     }
 }
 

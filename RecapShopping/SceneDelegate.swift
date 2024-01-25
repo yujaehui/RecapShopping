@@ -35,7 +35,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let vc = sb.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
             vc.tabBar.backgroundColor = .background
             vc.tabBar.tintColor = .point
-            vc.tabBar.barTintColor = .secondaryLabel
+            vc.tabBar.barTintColor = .background
             window?.rootViewController = vc
             window?.makeKeyAndVisible()
         }

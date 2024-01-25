@@ -76,10 +76,6 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc func cancelButtonClicked() {
-        navigationController?.popViewController(animated: true)
-    }
-    
     @objc func completeButtonClicked() {
         guard let text = nicknameTextField.text else { return }
         userNickname = text
@@ -108,8 +104,7 @@ extension ProfileViewController {
         navigationItem.title = accessType == .setting ? "프로필 설정" : "프로필 수정"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
-        navigationItem.backBarButtonItem?.isEnabled = true
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(cancelButtonClicked))
+        navigationItem.title = ""
     }
 }
 
