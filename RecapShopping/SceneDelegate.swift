@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window = UIWindow(windowScene: scene)
             
             let sb = UIStoryboard(name: "Onboarding", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "OnboardingViewController") as! OnboardingViewController
+            let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.identifier) as! OnboardingViewController
             let nav = UINavigationController(rootViewController: vc)
             window?.rootViewController = nav
             window?.makeKeyAndVisible()
@@ -31,12 +31,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let scene = (scene as? UIWindowScene) else { return }
             window = UIWindow(windowScene: scene)
             
-            let sb = UIStoryboard(name: "Search", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
-            vc.tabBar.backgroundColor = .background
-            vc.tabBar.tintColor = .point
-            vc.tabBar.barTintColor = .background
-            window?.rootViewController = vc
+//            let sb = UIStoryboard(name: "Search", bundle: nil)
+//            let vc = sb.instantiateViewController(withIdentifier: "mainTabBarController") as! UITabBarController
+//            vc.tabBar.backgroundColor = .background
+//            vc.tabBar.tintColor = .point
+//            vc.tabBar.barTintColor = .background
+//            window?.rootViewController = vc
+//            window?.makeKeyAndVisible()
+            
+//            window?.rootViewController = UINavigationController(rootViewController: SearchingViewController())
+//            window?.makeKeyAndVisible()
+           
+            window?.rootViewController = ViewController()
             window?.makeKeyAndVisible()
         }
 

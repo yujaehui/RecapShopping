@@ -21,6 +21,8 @@ class OnboardingViewController: UIViewController {
         configureUI()
         
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+        
+        navigationItem.backButtonTitle = ""
     }
     
     @objc func startButtonClicked() {
@@ -33,9 +35,6 @@ class OnboardingViewController: UIViewController {
         content.title = "지금 쇼핑 어때요?"
         content.body = "당신이 원하는 그 상품이 할인 중일지도 몰라요🤫"
         let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10800, repeats: true)
-//        var component = DateComponents()
-//        component.hour = 3
-//        let calenderTrigger = UNCalendarNotificationTrigger(dateMatching: component, repeats: false)
         let request = UNNotificationRequest(identifier: "\(Date())", content: content, trigger: timeTrigger)
         UNUserNotificationCenter.current().add(request)
     }

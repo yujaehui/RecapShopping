@@ -60,6 +60,12 @@ class ProfileViewController: UIViewController {
         } else {
             stateTextField("사용할 수 있는 닉네임이에요.", color: .point, isEnabled: true)
         }
+        
+        if text.first == " " {
+            stateTextField("닉네임은 공백으로 시작할 수 없어요.", color: .systemRed, isEnabled: false)
+        } else if text.contains("  ") {
+            stateTextField("닉네임에 공백을 연속으로 사용할 수 없어요.", color: .red, isEnabled: false)
+        }
     }
     
     func stateTextField(_ text: String, color: UIColor, isEnabled: Bool) {
@@ -104,7 +110,7 @@ extension ProfileViewController {
         navigationItem.title = accessType == .setting ? "프로필 설정" : "프로필 수정"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
-        navigationItem.title = ""
+        navigationItem.backButtonTitle = ""
     }
 }
 
