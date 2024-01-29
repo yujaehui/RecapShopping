@@ -19,7 +19,7 @@ class ViewController: UITabBarController {
     }
 
     private func addVC() {
-        let searchVC = UINavigationController(rootViewController: SearchingViewController())
+        let searchVC = UINavigationController(rootViewController: UserSearchViewController())
         searchVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglass"))
         
         let sb = UIStoryboard(name: "Setting", bundle: nil)

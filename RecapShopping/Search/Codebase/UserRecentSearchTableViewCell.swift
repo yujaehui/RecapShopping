@@ -1,5 +1,5 @@
 //
-//  SearchingTableViewCell.swift
+//  UserRecentSearchTableViewCell.swift
 //  RecapShopping
 //
 //  Created by Jaehui Yu on 1/28/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SearchingTableViewCell: UITableViewCell {
+class UserRecentSearchTableViewCell: UITableViewCell {
     
     let magnifyingglassImageView = UIImageView()
     let recentSearchLabel = UILabel()

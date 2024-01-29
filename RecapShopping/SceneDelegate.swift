@@ -38,9 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            vc.tabBar.barTintColor = .background
 //            window?.rootViewController = vc
 //            window?.makeKeyAndVisible()
-            
-//            window?.rootViewController = UINavigationController(rootViewController: SearchingViewController())
-//            window?.makeKeyAndVisible()
            
             window?.rootViewController = ViewController()
             window?.makeKeyAndVisible()

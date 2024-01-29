@@ -116,10 +116,14 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == SettingCellType.profile.rawValue {
-            let sb = UIStoryboard(name: "Profile", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.identifier) as! ProfileViewController
+//            let sb = UIStoryboard(name: "Profile", bundle: nil)
+//            let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.identifier) as! ProfileViewController
+//            vc.accessType = .edit
+//            navigationController?.pushViewController(vc, animated: true)
+            let vc = UserProfileViewController()
             vc.accessType = .edit
             navigationController?.pushViewController(vc, animated: true)
+            
         } else if indexPath.section == SettingCellType.setting.rawValue && indexPath.row == 4 {
             showAlert(title: "처음부터 시작하기", message: "데이터를 모두 초기화하시겠습니까?", buttonTitle: "확인") {
                 // 모든 userDefaults 항목 제거

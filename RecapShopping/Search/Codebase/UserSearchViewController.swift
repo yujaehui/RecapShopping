@@ -1,5 +1,5 @@
 //
-//  SearchingViewController.swift
+//  UserSearchViewController.swift
 //  RecapShopping
 //
 //  Created by Jaehui Yu on 1/28/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SearchingViewController: UIViewController {
+class UserSearchViewController: UIViewController {
     
     let searchBar = UISearchBar()
     let recentSearchLabel = UILabel()
@@ -24,8 +24,8 @@ class SearchingViewController: UIViewController {
         super.viewDidLoad()
         
         configureHierarchy()
-        configureView()
-        setContstraints()
+        configureUI()
+        configureConstraints()
                 
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
     }
@@ -38,20 +38,6 @@ class SearchingViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
-    }
-    
-    @objc func deleteButtonClicked(_ sender: UIButton) {
-        recentSearchList.remove(at: sender.tag)
-        UserDefaultsManager.shared.searchList = recentSearchList
-        recentSearchListIsEmpty()
-        recentSearchTableView.reloadData()
-    }
-    
-    @objc func deleteAllButtonClicked() {
-        recentSearchList.removeAll()
-        UserDefaultsManager.shared.searchList = recentSearchList
-        recentSearchListIsEmpty()
-        recentSearchTableView.reloadData()
     }
     
     func setNavigation() {
@@ -70,7 +56,7 @@ class SearchingViewController: UIViewController {
         view.addSubview(recentSearchTableView)
     }
     
-    func configureView() {
+    func configureUI() {
         setViewBackgroundColor()
         recentSearchTableView.setTableViewBackgroundColor()
         
@@ -98,12 +84,12 @@ class SearchingViewController: UIViewController {
         
         recentSearchTableView.dataSource = self
         recentSearchTableView.delegate = self
-        recentSearchTableView.register(SearchingTableViewCell.self, forCellReuseIdentifier: "SearchingTableViewCell")
+        recentSearchTableView.register(UserRecentSearchTableViewCell.self, forCellReuseIdentifier: UserRecentSearchTableViewCell.identifier)
         
        recentSearchListIsEmpty()
     }
     
-    func setContstraints() {
+    func configureConstraints() {
         searchBar.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
@@ -137,9 +123,23 @@ class SearchingViewController: UIViewController {
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    @objc func deleteButtonClicked(_ sender: UIButton) {
+        recentSearchList.remove(at: sender.tag)
+        UserDefaultsManager.shared.searchList = recentSearchList
+        recentSearchListIsEmpty()
+        recentSearchTableView.reloadData()
+    }
+    
+    @objc func deleteAllButtonClicked() {
+        recentSearchList.removeAll()
+        UserDefaultsManager.shared.searchList = recentSearchList
+        recentSearchListIsEmpty()
+        recentSearchTableView.reloadData()
+    }
 }
 
-extension SearchingViewController: UISearchBarDelegate {
+extension UserSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else { return }
         search(text: text)
@@ -176,13 +176,13 @@ extension SearchingViewController: UISearchBarDelegate {
     }
 }
 
-extension SearchingViewController: UITableViewDataSource, UITableViewDelegate {
+extension UserSearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recentSearchList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchingTableViewCell", for: indexPath) as! SearchingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: UserRecentSearchTableViewCell.identifier, for: indexPath) as! UserRecentSearchTableViewCell
         cell.recentSearchLabel.text = recentSearchList[indexPath.row]
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
