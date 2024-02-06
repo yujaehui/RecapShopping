@@ -8,6 +8,15 @@
 import UIKit
 import SnapKit
 
+enum ValidationError: Error {
+    case lessThanCount
+    case countExceeded
+    case forbiddenCharacters
+    case forbiddenNumbers
+    case startBlank
+    case continuousBlank
+}
+
 class UserProfileViewController: UIViewController {
     
     let profileImageView = ProfileImageView(frame: .zero)
@@ -132,20 +141,30 @@ class UserProfileViewController: UIViewController {
         guard let text = nicknameTextField.text else { return }
         let forbiddenCharacters = ["@", "#", "$", "%"]
         let forbiddenNumbers = ["0","1","2","3","4","5","6","7","8","9"]
-        if text.count < 2 || text.count > 10 {
-            stateTextField("닉네임은 2글자 이상, 10글자 이내로 설정해주세요.", color: .systemRed, isEnabled: false)
-        } else if forbiddenCharacters.contains(where: { text.contains($0) }) {
-            stateTextField("닉네임에 @, #, $, %를 입력할 수 없어요.", color: .systemRed, isEnabled: false)
-        } else if forbiddenNumbers.contains(where: { text.contains($0) }) {
-            stateTextField("닉네임에 숫자는 입력할 수 없어요.", color: .systemRed, isEnabled: false)
-        } else {
+        
+        do {
+            let _ = try validateUserInputError(text: text)
             stateTextField("사용할 수 있는 닉네임이에요.", color: .point, isEnabled: true)
+        } catch {
+            switch error {
+            case ValidationError.lessThanCount: stateTextField("닉네임은 2글자 이상으로 설정해주세요.", color: .systemRed, isEnabled: false)
+            case ValidationError.countExceeded: stateTextField("닉네임은 10글자 이내로 설정해주세요.", color: .systemRed, isEnabled: false)
+            case ValidationError.forbiddenCharacters: stateTextField("닉네임에 @, #, $, %를 입력할 수 없어요.", color: .systemRed, isEnabled: false)
+            case ValidationError.forbiddenNumbers: stateTextField("닉네임에 숫자는 입력할 수 없어요.", color: .systemRed, isEnabled: false)
+            case ValidationError.startBlank: stateTextField("닉네임은 공백으로 시작할 수 없어요.", color: .systemRed, isEnabled: false)
+            case ValidationError.continuousBlank: stateTextField("닉네임에 공백을 연속으로 사용할 수 없어요.", color: .red, isEnabled: false)
+            default: print(error)
+            }
         }
         
-        if text.first == " " {
-            stateTextField("닉네임은 공백으로 시작할 수 없어요.", color: .systemRed, isEnabled: false)
-        } else if text.contains("  ") {
-            stateTextField("닉네임에 공백을 연속으로 사용할 수 없어요.", color: .red, isEnabled: false)
+        func validateUserInputError(text: String) throws -> Bool {
+            guard !(text.count < 2) else { throw ValidationError.lessThanCount }
+            guard !(text.count > 10) else { throw ValidationError.countExceeded }
+            guard !(forbiddenCharacters.contains { text.contains($0) }) else { throw ValidationError.forbiddenCharacters }
+            guard !(forbiddenNumbers.contains { text.contains($0) }) else { throw ValidationError.forbiddenNumbers }
+            guard text.first != " " else { throw ValidationError.startBlank }
+            guard !text.contains("  ") else { throw ValidationError.continuousBlank }
+            return true
         }
         
         func stateTextField(_ text: String, color: UIColor, isEnabled: Bool) {

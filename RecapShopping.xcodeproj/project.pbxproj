@@ -60,6 +60,8 @@
 		09ABBCDB2B6797C5009B50EC /* UserProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABBCDA2B6797C5009B50EC /* UserProfileImageViewController.swift */; };
 		09ABBCE12B67A0E4009B50EC /* UserProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABBCE02B67A0E4009B50EC /* UserProfileImageCollectionViewCell.swift */; };
 		09AC237E2B5FCCF00081C358 /* SearchAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AC237D2B5FCCF00081C358 /* SearchAPIManager.swift */; };
+		09DA24142B722C5B0092F537 /* SearchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA24132B722C5B0092F537 /* SearchSessionManager.swift */; };
+		09DA24182B725CDA0092F537 /* ShoppingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA24172B725CDA0092F537 /* ShoppingAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +116,8 @@
 		09ABBCDA2B6797C5009B50EC /* UserProfileImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageViewController.swift; sourceTree = "<group>"; };
 		09ABBCE02B67A0E4009B50EC /* UserProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		09AC237D2B5FCCF00081C358 /* SearchAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPIManager.swift; sourceTree = "<group>"; };
+		09DA24132B722C5B0092F537 /* SearchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSessionManager.swift; sourceTree = "<group>"; };
+		09DA24172B725CDA0092F537 /* ShoppingAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 		09191CB22B5A17A600E3FE7B /* RecapShopping */ = {
 			isa = PBXGroup;
 			children = (
+				09DA24122B722C3E0092F537 /* Network */,
 				09ABBCCF2B67567C009B50EC /* CustomView */,
 				09191CFC2B5AA72900E3FE7B /* Model */,
 				09191CC72B5A17CF00E3FE7B /* Onboarding */,
@@ -157,7 +162,7 @@
 				09191CCA2B5A17F100E3FE7B /* Profile */,
 				09191CD12B5A1E0B00E3FE7B /* Setting */,
 				09191D112B5D3D5900E3FE7B /* Extension */,
-				09191D1A2B5D422C00E3FE7B /* Enum */,
+				09191D1A2B5D422C00E3FE7B /* Style */,
 				09191CB72B5A17A600E3FE7B /* ViewController.swift */,
 				09191CB32B5A17A600E3FE7B /* AppDelegate.swift */,
 				09191CB52B5A17A600E3FE7B /* SceneDelegate.swift */,
@@ -235,12 +240,12 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		09191D1A2B5D422C00E3FE7B /* Enum */ = {
+		09191D1A2B5D422C00E3FE7B /* Style */ = {
 			isa = PBXGroup;
 			children = (
 				09191D1C2B5D423D00E3FE7B /* FontStyle.swift */,
 			);
-			path = Enum;
+			path = Style;
 			sourceTree = "<group>";
 		};
 		09ABBCCF2B67567C009B50EC /* CustomView */ = {
@@ -292,12 +297,21 @@
 				09191CF22B5A51F400E3FE7B /* RecentSearchTableViewCell.swift */,
 				09191CF32B5A51F400E3FE7B /* RecentSearchTableViewCell.xib */,
 				09191CD82B5A28E300E3FE7B /* SearchResultViewController.swift */,
-				09AC237D2B5FCCF00081C358 /* SearchAPIManager.swift */,
 				09191CF82B5A53DF00E3FE7B /* SearchResultCollectionViewCell.swift */,
 				09191CF92B5A53DF00E3FE7B /* SearchResultCollectionViewCell.xib */,
 				09191CF02B5A51D900E3FE7B /* SearchDetailViewController.swift */,
 			);
 			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		09DA24122B722C3E0092F537 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				09AC237D2B5FCCF00081C358 /* SearchAPIManager.swift */,
+				09DA24132B722C5B0092F537 /* SearchSessionManager.swift */,
+				09DA24172B725CDA0092F537 /* ShoppingAPI.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -422,12 +436,14 @@
 				09191CF12B5A51D900E3FE7B /* SearchDetailViewController.swift in Sources */,
 				09191D222B5D442100E3FE7B /* UITextField+Extension.swift in Sources */,
 				09ABBCD12B675697009B50EC /* ProfileImageView.swift in Sources */,
+				09DA24182B725CDA0092F537 /* ShoppingAPI.swift in Sources */,
 				09191D042B5CCC2F00E3FE7B /* APIKey.swift in Sources */,
 				09191CD52B5A20E700E3FE7B /* OnboardingViewController.swift in Sources */,
 				09191D372B5E370D00E3FE7B /* UICollectionView+Extension.swift in Sources */,
 				09ABBCE12B67A0E4009B50EC /* UserProfileImageCollectionViewCell.swift in Sources */,
 				09191D352B5E36EA00E3FE7B /* UITableView+Extension.swift in Sources */,
 				09ABBCD72B679540009B50EC /* PointColorButton.swift in Sources */,
+				09DA24142B722C5B0092F537 /* SearchSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

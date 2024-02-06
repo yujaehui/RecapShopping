@@ -10,10 +10,10 @@ import Alamofire
 import Kingfisher
 
 enum Sort: String {
-    case sim = "정확도순"
-    case date = "날짜순"
-    case dsc = "가격높은순"
-    case asc = "가격낮은순"
+    case sim
+    case date
+    case dsc
+    case asc
 }
 
 class SearchResultViewController: UIViewController {
@@ -41,16 +41,16 @@ class SearchResultViewController: UIViewController {
             resultCollectionView.reloadData()
         }
     }
-
+    
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setNavigation()
         configureUI()
         configureCollectionView()
         callRequest()
-
+        
         accuracyButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
         dateButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
         expensiveButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
@@ -65,10 +65,10 @@ class SearchResultViewController: UIViewController {
     }
     
     @objc func sortButtonClicked(_ sender: UIButton) {
-        designButton(accuracyButton, title: Sort.sim.rawValue)
-        designButton(dateButton, title: Sort.date.rawValue)
-        designButton(expensiveButton, title: Sort.dsc.rawValue)
-        designButton(cheapButton, title: Sort.asc.rawValue)
+        designButton(accuracyButton, title: "정확도순")
+        designButton(dateButton, title: "날짜순")
+        designButton(expensiveButton, title: "가격높은순")
+        designButton(cheapButton, title: "가격낮은순")
         designSelectButton(sender)
         
         switch sender {
@@ -83,7 +83,7 @@ class SearchResultViewController: UIViewController {
         default:
             break
         }
-
+        
         start = 1
         callRequest()
     }
@@ -114,7 +114,7 @@ extension SearchResultViewController {
     func configureUI() {
         setViewBackgroundColor()
         resultCollectionView.setCollectionViewBackgroundColor()
-
+        
         resultCountLabel.textColor = .point
         resultCountLabel.font = FontStyle.tertiary
         
@@ -217,11 +217,11 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
         guard let amount = Int(amountString) else {
             return nil
         }
-
+        
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale.current
-
+        
         if let formattedAmount = formatter.string(from: NSNumber(value: amount)) {
             return formattedAmount
         } else {
@@ -237,7 +237,9 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
         for item in indexPaths {
             if shoppingList.items.count - 3 == item.row && total != item.row {
                 start += 20
-                callRequest()
+                if start < total {
+                    callRequest()
+                }
             }
         }
     }
@@ -249,33 +251,52 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
 // MARK: callRequest
 extension SearchResultViewController {
     func callRequest() {
-        SearchAPIManager.shared.callRequest(text: searchText, start: start, sort: sort) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let success):
-                self.total = success.total
+        
+        SearchSessionManager.request(request: ShoppingAPI.search(query: searchText, start: start, sort: sort.rawValue).endpoint) { (shopping: Shopping?, error: ErrorType?) in
+            if error == nil {
+                guard let shopping = shopping else { return }
+                self.total = shopping.total
                 
                 if self.total == 0 {
                     self.showEmptyState()
                 } else if self.start == 1 {
-                    self.shoppingList = success
+                    self.shoppingList = shopping
                 } else {
-                    self.shoppingList.items.append(contentsOf: success.items)
+                    self.shoppingList.items.append(contentsOf: shopping.items)
                 }
                 
                 self.resultCountLabel.text = "\(self.formatQuantity(self.total))개의 검색 결과"
                 
                 self.resultCollectionView.reloadData()
                 
-                // total이 0보다 크다는 조건을 두지 않으면 런타임 오류 !
                 if self.start == 1 && self.total > 0 {
                     self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
                 }
-                
-            case .failure(let failure):
-                print(failure)
             }
         }
+        
+        //        SearchSessionManager.searchRequest(query: searchText, start: start, sort: sort.rawValue) { shopping, error in
+        //            if error == nil {
+        //                guard let shopping = shopping else { return }
+        //                self.total = shopping.total
+        //
+        //                if self.total == 0 {
+        //                    self.showEmptyState()
+        //                } else if self.start == 1 {
+        //                    self.shoppingList = shopping
+        //                } else {
+        //                    self.shoppingList.items.append(contentsOf: shopping.items)
+        //                }
+        //
+        //                self.resultCountLabel.text = "\(self.formatQuantity(self.total))개의 검색 결과"
+        //
+        //                self.resultCollectionView.reloadData()
+        //
+        //                if self.start == 1 && self.total > 0 {
+        //                    self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        //                }
+        //            }
+        //        }
     }
     
     // 검색 결과가 없을 때의 UI 처리
@@ -294,7 +315,7 @@ extension SearchResultViewController {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.locale = Locale.current
-
+        
         if let formattedCount = formatter.string(from: NSNumber(value: count)) {
             return formattedCount
         } else {
