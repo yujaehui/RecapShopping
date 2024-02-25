@@ -11,18 +11,7 @@ import SnapKit
 class UserProfileImageViewController: UIViewController {
     let profileImageView = ProfileImageView(frame: .zero)
     let profileImageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
-    
-    static func configureCollectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 16
-        let cellWidth = UIScreen.main.bounds.width - (spacing * 5)
-        layout.itemSize = CGSize(width: cellWidth / 4, height: cellWidth / 4)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: spacing, right: spacing)
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        return layout
-    }
-    
+
     var type: AccessType = .setting
     var userSelect = 0
     
@@ -30,7 +19,7 @@ class UserProfileImageViewController: UIViewController {
         super.viewDidLoad()
         setNavigation()
         configureHierarchy()
-        configureUI()
+        configureView()
         configureConstraints()
     }
     
@@ -50,7 +39,7 @@ class UserProfileImageViewController: UIViewController {
         view.addSubview(profileImageCollectionView)
     }
     
-    func configureUI() {
+    func configureView() {
         setViewBackgroundColor()
         profileImageCollectionView.setCollectionViewBackgroundColor()
         let profileImage = UserDefaultsManager.shared.profileImage
@@ -77,6 +66,17 @@ class UserProfileImageViewController: UIViewController {
 }
 
 extension UserProfileImageViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    static func configureCollectionViewLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = 16
+        let cellWidth = UIScreen.main.bounds.width - (spacing * 5)
+        layout.itemSize = CGSize(width: cellWidth / 4, height: cellWidth / 4)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: spacing, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        return layout
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 14
     }

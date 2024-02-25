@@ -53,6 +53,11 @@
 		092A13692B6636170093636A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 092A13682B6636170093636A /* SnapKit */; };
 		092A136B2B6636170093636A /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 092A136A2B6636170093636A /* SnapKit-Dynamic */; };
 		092A136D2B6637A20093636A /* UserRecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A136C2B6637A20093636A /* UserRecentSearchTableViewCell.swift */; };
+		09A91C0C2B888899005755C1 /* UserSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C0B2B888899005755C1 /* UserSearchResultViewController.swift */; };
+		09A91C0E2B889060005755C1 /* UserSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C0D2B889060005755C1 /* UserSearchResultCollectionViewCell.swift */; };
+		09A91C102B889BFA005755C1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C0F2B889BFA005755C1 /* ProfileViewModel.swift */; };
+		09A91C122B889C05005755C1 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C112B889C05005755C1 /* Observable.swift */; };
+		09A91C142B88BB67005755C1 /* UserSearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C132B88BB67005755C1 /* UserSearchDetailViewController.swift */; };
 		09ABBCD12B675697009B50EC /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABBCD02B675697009B50EC /* ProfileImageView.swift */; };
 		09ABBCD52B678762009B50EC /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABBCD42B678762009B50EC /* UserProfileViewController.swift */; };
 		09ABBCD72B679540009B50EC /* PointColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ABBCD62B679540009B50EC /* PointColorButton.swift */; };
@@ -109,6 +114,11 @@
 		09191D362B5E370D00E3FE7B /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		092A13652B6636020093636A /* UserSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
 		092A136C2B6637A20093636A /* UserRecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecentSearchTableViewCell.swift; sourceTree = "<group>"; };
+		09A91C0B2B888899005755C1 /* UserSearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultViewController.swift; sourceTree = "<group>"; };
+		09A91C0D2B889060005755C1 /* UserSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		09A91C0F2B889BFA005755C1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		09A91C112B889C05005755C1 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		09A91C132B88BB67005755C1 /* UserSearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchDetailViewController.swift; sourceTree = "<group>"; };
 		09ABBCD02B675697009B50EC /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		09ABBCD42B678762009B50EC /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		09ABBCD62B679540009B50EC /* PointColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointColorButton.swift; sourceTree = "<group>"; };
@@ -154,6 +164,7 @@
 		09191CB22B5A17A600E3FE7B /* RecapShopping */ = {
 			isa = PBXGroup;
 			children = (
+				09A91C092B8886B4005755C1 /* Realm */,
 				09DA24122B722C3E0092F537 /* Network */,
 				09ABBCCF2B67567C009B50EC /* CustomView */,
 				09191CFC2B5AA72900E3FE7B /* Model */,
@@ -166,6 +177,7 @@
 				09191CB72B5A17A600E3FE7B /* ViewController.swift */,
 				09191CB32B5A17A600E3FE7B /* AppDelegate.swift */,
 				09191CB52B5A17A600E3FE7B /* SceneDelegate.swift */,
+				09A91C112B889C05005755C1 /* Observable.swift */,
 				09191CB92B5A17A600E3FE7B /* Main.storyboard */,
 				09191CBE2B5A17A700E3FE7B /* LaunchScreen.storyboard */,
 				09191CBC2B5A17A700E3FE7B /* Assets.xcassets */,
@@ -198,6 +210,7 @@
 		09191CCA2B5A17F100E3FE7B /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				09A91C0F2B889BFA005755C1 /* ProfileViewModel.swift */,
 				09ABBCD32B6768B4009B50EC /* Codebase */,
 				09ABBCDC2B6797D3009B50EC /* Stroyboard */,
 			);
@@ -248,6 +261,13 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		09A91C092B8886B4005755C1 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		09ABBCCF2B67567C009B50EC /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +283,9 @@
 			children = (
 				092A13652B6636020093636A /* UserSearchViewController.swift */,
 				092A136C2B6637A20093636A /* UserRecentSearchTableViewCell.swift */,
+				09A91C0B2B888899005755C1 /* UserSearchResultViewController.swift */,
+				09A91C0D2B889060005755C1 /* UserSearchResultCollectionViewCell.swift */,
+				09A91C132B88BB67005755C1 /* UserSearchDetailViewController.swift */,
 			);
 			path = Codebase;
 			sourceTree = "<group>";
@@ -411,14 +434,17 @@
 				09191D0B2B5CCE4700E3FE7B /* Shopping.swift in Sources */,
 				09191D1D2B5D423D00E3FE7B /* FontStyle.swift in Sources */,
 				09191CEA2B5A4BBA00E3FE7B /* SettingTableViewCell.swift in Sources */,
+				09A91C0C2B888899005755C1 /* UserSearchResultViewController.swift in Sources */,
 				09ABBCD92B679634009B50EC /* NicknameTextField.swift in Sources */,
 				09191D002B5AAD6500E3FE7B /* UserDefaultsManager.swift in Sources */,
 				09191D192B5D420400E3FE7B /* UIImageView+Extension.swift in Sources */,
 				09191CD72B5A249300E3FE7B /* SearchViewController.swift in Sources */,
+				09A91C122B889C05005755C1 /* Observable.swift in Sources */,
 				09191CB82B5A17A600E3FE7B /* ViewController.swift in Sources */,
 				09ABBCD52B678762009B50EC /* UserProfileViewController.swift in Sources */,
 				092A13662B6636020093636A /* UserSearchViewController.swift in Sources */,
 				09191D152B5D3D8000E3FE7B /* UITableViewCell+Extension.swift in Sources */,
+				09A91C0E2B889060005755C1 /* UserSearchResultCollectionViewCell.swift in Sources */,
 				09191CFA2B5A53DF00E3FE7B /* SearchResultCollectionViewCell.swift in Sources */,
 				09191D132B5D3D7100E3FE7B /* UIViewController+Extension.swift in Sources */,
 				09191D172B5D3D8C00E3FE7B /* UICollectionViewCell+Extension.swift in Sources */,
@@ -426,7 +452,9 @@
 				09191CB42B5A17A600E3FE7B /* AppDelegate.swift in Sources */,
 				09191D242B5D4B1200E3FE7B /* UIButton+Extension.swift in Sources */,
 				09ABBCDB2B6797C5009B50EC /* UserProfileImageViewController.swift in Sources */,
+				09A91C142B88BB67005755C1 /* UserSearchDetailViewController.swift in Sources */,
 				09191CE22B5A422400E3FE7B /* ProfileTableViewCell.swift in Sources */,
+				09A91C102B889BFA005755C1 /* ProfileViewModel.swift in Sources */,
 				09191CB62B5A17A600E3FE7B /* SceneDelegate.swift in Sources */,
 				09191CEE2B5A4E2F00E3FE7B /* ProfileImageCollectionViewCell.swift in Sources */,
 				09191CE52B5A44A000E3FE7B /* SettingViewController.swift in Sources */,

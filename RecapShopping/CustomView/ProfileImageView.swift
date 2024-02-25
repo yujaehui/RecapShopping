@@ -18,15 +18,12 @@ class ProfileImageView: UIImageView {
     }
     
     override func layoutSubviews() {
-            super.layoutSubviews()
-            layer.cornerRadius = bounds.width / 2
-        }
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.width / 2
+    }
     
     func configureView() {
         clipsToBounds = true
-//        DispatchQueue.main.async {
-//            self.layer.cornerRadius = self.bounds.width/2
-//        }
         layer.borderWidth = 4
         layer.borderColor = CGColor(srgbRed: 73/255, green: 220/255, blue: 146/255, alpha: 1)
         isUserInteractionEnabled = true

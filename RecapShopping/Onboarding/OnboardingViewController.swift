@@ -18,7 +18,7 @@ class OnboardingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
+        configureView()
         
         startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
         
@@ -26,9 +26,9 @@ class OnboardingViewController: UIViewController {
     }
     
     @objc func startButtonClicked() {
-        let sb = UIStoryboard(name: "Profile", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: ProfileViewController.identifier) as! ProfileViewController
+        let vc = UserProfileViewController()
         vc.accessType = .setting
+        vc.userNickname = ""
         navigationController?.pushViewController(vc, animated: true)
         
         let content = UNMutableNotificationContent()
@@ -40,9 +40,9 @@ class OnboardingViewController: UIViewController {
     }
 }
 
-// MARK: configureUI
+// MARK: configureView
 extension OnboardingViewController {
-    func configureUI() {
+    func configureView() {
         setViewBackgroundColor()
         sesacShoppingImageView.image = UIImage(named: "sesacShopping")
         onboardingImageView.image = UIImage(named: "onboarding")

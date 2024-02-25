@@ -1,30 +1,22 @@
 //
-//  SearchResultViewController.swift
+//  UserSearchResultViewController.swift
 //  RecapShopping
 //
-//  Created by Jaehui Yu on 1/19/24.
+//  Created by Jaehui Yu on 2/23/24.
 //
 
 import UIKit
-import Alamofire
-import Kingfisher
+import SnapKit
 
-enum Sort: String {
-    case sim
-    case date
-    case dsc
-    case asc
-}
-
-class SearchResultViewController: UIViewController {
+class UserSearchResultViewController: UIViewController {
     
-    @IBOutlet var resultCountLabel: UILabel!
-    @IBOutlet var accuracyButton: UIButton!
-    @IBOutlet var dateButton: UIButton!
-    @IBOutlet var expensiveButton: UIButton!
-    @IBOutlet var cheapButton: UIButton!
-    @IBOutlet var resultCollectionView: UICollectionView!
-    @IBOutlet var emptyLabel: UILabel!
+    let resultCountLabel = UILabel()
+    let accuracyButton = UIButton()
+    let dateButton = UIButton()
+    let expensiveButton = UIButton()
+    let cheapButton = UIButton()
+    let resultCollectionView = UICollectionView(frame: .zero, collectionViewLayout: configureCollectionViewLayout())
+    let emptyLabel = UILabel()
     
     var searchText = "" // 값 전달 받을 공간
     var shoppingList = Shopping()
@@ -47,15 +39,15 @@ class SearchResultViewController: UIViewController {
         super.viewDidLoad()
         
         setNavigation()
+        configureHierarchy()
         configureView()
-        configureCollectionView()
+        configureConstraints()
         callRequest()
         
         accuracyButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
         dateButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
         expensiveButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
         cheapButton.addTarget(self, action: #selector(sortButtonClicked(_:)), for: .touchUpInside)
-        
     }
     
     // MARK: viewWillAppear
@@ -72,16 +64,11 @@ class SearchResultViewController: UIViewController {
         designSelectButton(sender)
         
         switch sender {
-        case accuracyButton:
-            sort = .sim
-        case dateButton:
-            sort = .date
-        case expensiveButton:
-            sort = .dsc
-        case cheapButton:
-            sort = .asc
-        default:
-            break
+        case accuracyButton: sort = .sim
+        case dateButton: sort = .date
+        case expensiveButton: sort = .dsc
+        case cheapButton: sort = .asc
+        default: break
         }
         
         start = 1
@@ -100,7 +87,7 @@ class SearchResultViewController: UIViewController {
 }
 
 // MARK: setNavigation
-extension SearchResultViewController {
+extension UserSearchResultViewController {
     func setNavigation() {
         navigationItem.title = searchText // 전달받은 값을 네비게이션 타이틀로 설정
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
@@ -110,7 +97,17 @@ extension SearchResultViewController {
 }
 
 // MARK: configureView
-extension SearchResultViewController {
+extension UserSearchResultViewController {
+    func configureHierarchy() {
+        view.addSubview(resultCountLabel)
+        view.addSubview(accuracyButton)
+        view.addSubview(dateButton)
+        view.addSubview(expensiveButton)
+        view.addSubview(cheapButton)
+        view.addSubview(resultCollectionView)
+        view.addSubview(emptyLabel)
+    }
+    
     func configureView() {
         setViewBackgroundColor()
         resultCollectionView.setCollectionViewBackgroundColor()
@@ -124,6 +121,11 @@ extension SearchResultViewController {
         designButton(cheapButton, title: "가격낮은순")
         designSelectButton(accuracyButton)
         
+        resultCollectionView.dataSource = self
+        resultCollectionView.delegate = self
+        resultCollectionView.register(UserSearchResultCollectionViewCell.self, forCellWithReuseIdentifier: UserSearchResultCollectionViewCell.identifier)
+        resultCollectionView.prefetchDataSource = self
+        
         emptyLabel.text = "상품을 찾을 수 없어요"
         emptyLabel.textColor = .text
         emptyLabel.textAlignment = .center
@@ -132,7 +134,7 @@ extension SearchResultViewController {
     
     func designButton(_ button: UIButton, title: String) {
         button.setTitle(title, for: .normal)
-        button.tintColor = .text
+        button.setTitleColor(.text, for: .normal)
         button.backgroundColor = .background
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
@@ -140,22 +142,58 @@ extension SearchResultViewController {
     }
     
     func designSelectButton(_ button: UIButton) { // 버튼이 눌렸을 경우 디자인 변경
-        button.tintColor = .background
+        button.setTitleColor(.background, for: .normal)
         button.backgroundColor = .text
         button.layer.cornerRadius = 10
     }
+    
+    func configureConstraints() {
+        resultCountLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+        
+        accuracyButton.snp.makeConstraints { make in
+            make.top.equalTo(resultCountLabel.snp.bottom).offset(8)
+            make.leading.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(35)
+        }
+        
+        dateButton.snp.makeConstraints { make in
+            make.top.equalTo(resultCountLabel.snp.bottom).offset(8)
+            make.leading.equalTo(accuracyButton.snp.trailing).offset(8)
+            make.height.equalTo(35)
+        }
+        
+        expensiveButton.snp.makeConstraints { make in
+            make.top.equalTo(resultCountLabel.snp.bottom).offset(8)
+            make.leading.equalTo(dateButton.snp.trailing).offset(8)
+            make.height.equalTo(35)
+        }
+        
+        cheapButton.snp.makeConstraints { make in
+            make.top.equalTo(resultCountLabel.snp.bottom).offset(8)
+            make.leading.equalTo(expensiveButton.snp.trailing).offset(8)
+            make.height.equalTo(35)
+        }
+        
+        resultCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(accuracyButton.snp.bottom).offset(16)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.center.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(25)
+            make.width.equalTo(200)
+        }
+        
+    }
 }
 
-// MARK: configureCollectionView
-extension SearchResultViewController {
-    func configureCollectionView() {
-        let xib = UINib(nibName: SearchResultCollectionViewCell.identifier, bundle: nil)
-        resultCollectionView.register(xib, forCellWithReuseIdentifier: SearchResultCollectionViewCell.identifier)
-        
-        resultCollectionView.dataSource = self
-        resultCollectionView.delegate = self
-        resultCollectionView.prefetchDataSource = self
-        
+// MARK: collectionView - DataSource, Delegate
+extension UserSearchResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    private static func configureCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
         let cellWidth = UIScreen.main.bounds.width - (spacing * 3)
@@ -163,18 +201,15 @@ extension SearchResultViewController {
         layout.sectionInset = UIEdgeInsets(top: 0, left: spacing, bottom: spacing, right: spacing)
         layout.minimumLineSpacing = spacing
         layout.minimumInteritemSpacing = spacing
-        resultCollectionView.collectionViewLayout = layout
+        return layout
     }
-}
-
-// MARK: collectionView - DataSource, Delegate
-extension SearchResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return shoppingList.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCollectionViewCell.identifier, for: indexPath) as! SearchResultCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserSearchResultCollectionViewCell.identifier, for: indexPath) as! UserSearchResultCollectionViewCell
         let row = shoppingList.items[indexPath.row]
         let imageURL = URL(string: row.image)
         cell.productImageView.kf.setImage(with: imageURL)
@@ -232,7 +267,7 @@ extension SearchResultViewController: UICollectionViewDataSource, UICollectionVi
 
 
 // MARK: collectionView - DataSourcePrefetching
-extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
+extension UserSearchResultViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         for item in indexPaths {
             if shoppingList.items.count - 3 == item.row && total != item.row {
@@ -249,9 +284,8 @@ extension SearchResultViewController: UICollectionViewDataSourcePrefetching {
 }
 
 // MARK: callRequest
-extension SearchResultViewController {
+extension UserSearchResultViewController {
     func callRequest() {
-        
         SearchSessionManager.request(request: ShoppingAPI.search(query: searchText, start: start, sort: sort.rawValue).endpoint) { (shopping: Shopping?, error: ErrorType?) in
             if error == nil {
                 guard let shopping = shopping else { return }
@@ -260,8 +294,10 @@ extension SearchResultViewController {
                 if self.total == 0 {
                     self.showEmptyState()
                 } else if self.start == 1 {
+                    self.emptyLabel.isHidden = true
                     self.shoppingList = shopping
                 } else {
+                    self.emptyLabel.isHidden = true
                     self.shoppingList.items.append(contentsOf: shopping.items)
                 }
                 
@@ -274,29 +310,6 @@ extension SearchResultViewController {
                 }
             }
         }
-        
-        //        SearchSessionManager.searchRequest(query: searchText, start: start, sort: sort.rawValue) { shopping, error in
-        //            if error == nil {
-        //                guard let shopping = shopping else { return }
-        //                self.total = shopping.total
-        //
-        //                if self.total == 0 {
-        //                    self.showEmptyState()
-        //                } else if self.start == 1 {
-        //                    self.shoppingList = shopping
-        //                } else {
-        //                    self.shoppingList.items.append(contentsOf: shopping.items)
-        //                }
-        //
-        //                self.resultCountLabel.text = "\(self.formatQuantity(self.total))개의 검색 결과"
-        //
-        //                self.resultCollectionView.reloadData()
-        //
-        //                if self.start == 1 && self.total > 0 {
-        //                    self.resultCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-        //                }
-        //            }
-        //        }
     }
     
     // 검색 결과가 없을 때의 UI 처리
@@ -323,6 +336,3 @@ extension SearchResultViewController {
         }
     }
 }
-
-
-

@@ -24,7 +24,7 @@ class UserSearchViewController: UIViewController {
         super.viewDidLoad()
         
         configureHierarchy()
-        configureUI()
+        configureView()
         configureConstraints()
                 
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
@@ -56,7 +56,7 @@ class UserSearchViewController: UIViewController {
         view.addSubview(recentSearchTableView)
     }
     
-    func configureUI() {
+    func configureView() {
         setViewBackgroundColor()
         recentSearchTableView.setTableViewBackgroundColor()
         
@@ -165,9 +165,8 @@ extension UserSearchViewController: UISearchBarDelegate {
         }
         UserDefaultsManager.shared.searchList = recentSearchList
         recentSearchTableView.reloadData()
-        
-        let sb = UIStoryboard(name: "Search", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: SearchResultViewController.identifier) as! SearchResultViewController
+
+        let vc = UserSearchResultViewController()
         vc.searchText = text
         navigationController?.pushViewController(vc, animated: true)
         

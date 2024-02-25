@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 enum ValidationError: Error {
+    case isEmpty
+    case sameAsBefore
     case lessThanCount
     case countExceeded
     case forbiddenCharacters
@@ -27,22 +29,33 @@ class UserProfileViewController: UIViewController {
     
     var accessType: AccessType = .setting
     var userNickname = ""
-    var profileImage = Int.random(in: 1...4)
     
-    
+    let viewModel = ProfileViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.outputText.bind { value in
+            self.nicknameStateLabel.text = value
+        }
+        
+        viewModel.outputColor.bind { value in
+            self.nicknameStateLabel.textColor = value ? .point : .systemRed
+            self.completeButton.backgroundColor = value ? .point : .systemGray
+        }
+        
+        viewModel.outputIsEnabled.bind { value in
+            self.completeButton.isEnabled = value
+        }
+        
         setNavigation()
         configureHierarchy()
-        configureUI()
+        configureView()
         configureConstraints()
         
         let profileImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageViewTapped))
         profileImageView.addGestureRecognizer(profileImageViewTapGesture)
-        nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldStarted), for: .editingDidBegin)
-        nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldChanged), for: .editingChanged)
+        nicknameTextField.addTarget(self, action: #selector(nicknameTextFieldChanged), for: .allEditingEvents)
         completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
     }
     
@@ -72,15 +85,15 @@ class UserProfileViewController: UIViewController {
         view.addSubview(completeButton)
     }
     
-    func configureUI() {
+    func configureView() {
         setViewBackgroundColor()
         cameraImageView.image = UIImage(named: "camera")
         
         if UserDefaultsManager.shared.profileImage == 0 {
-            UserDefaultsManager.shared.profileImage = profileImage
+            UserDefaultsManager.shared.profileImage = Int.random(in: 1...4)
         }
             
-        nicknameTextField.text = accessType == .setting ? "" : UserDefaultsManager.shared.nickname // set?
+        nicknameTextField.text = userNickname // set?
         nicknameTextField.attributedPlaceholder = NSAttributedString(string: "닉네임을 입력해주세요 :)", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
         nicknameTextField.underLine(viewSize: view.bounds.width, color: .text)
         
@@ -127,51 +140,10 @@ class UserProfileViewController: UIViewController {
         vc.type = accessType
         vc.userSelect = UserDefaultsManager.shared.profileImage
         navigationController?.pushViewController(vc, animated: true)
-        
-    }
-    
-    @objc func nicknameTextFieldStarted() {
-        guard let text = nicknameTextField.text else { return }
-        if text.isEmpty {
-            completeButton.isEnabled = false
-        }
     }
     
     @objc func nicknameTextFieldChanged() {
-        guard let text = nicknameTextField.text else { return }
-        let forbiddenCharacters = ["@", "#", "$", "%"]
-        let forbiddenNumbers = ["0","1","2","3","4","5","6","7","8","9"]
-        
-        do {
-            let _ = try validateUserInputError(text: text)
-            stateTextField("사용할 수 있는 닉네임이에요.", color: .point, isEnabled: true)
-        } catch {
-            switch error {
-            case ValidationError.lessThanCount: stateTextField("닉네임은 2글자 이상으로 설정해주세요.", color: .systemRed, isEnabled: false)
-            case ValidationError.countExceeded: stateTextField("닉네임은 10글자 이내로 설정해주세요.", color: .systemRed, isEnabled: false)
-            case ValidationError.forbiddenCharacters: stateTextField("닉네임에 @, #, $, %를 입력할 수 없어요.", color: .systemRed, isEnabled: false)
-            case ValidationError.forbiddenNumbers: stateTextField("닉네임에 숫자는 입력할 수 없어요.", color: .systemRed, isEnabled: false)
-            case ValidationError.startBlank: stateTextField("닉네임은 공백으로 시작할 수 없어요.", color: .systemRed, isEnabled: false)
-            case ValidationError.continuousBlank: stateTextField("닉네임에 공백을 연속으로 사용할 수 없어요.", color: .red, isEnabled: false)
-            default: print(error)
-            }
-        }
-        
-        func validateUserInputError(text: String) throws -> Bool {
-            guard !(text.count < 2) else { throw ValidationError.lessThanCount }
-            guard !(text.count > 10) else { throw ValidationError.countExceeded }
-            guard !(forbiddenCharacters.contains { text.contains($0) }) else { throw ValidationError.forbiddenCharacters }
-            guard !(forbiddenNumbers.contains { text.contains($0) }) else { throw ValidationError.forbiddenNumbers }
-            guard text.first != " " else { throw ValidationError.startBlank }
-            guard !text.contains("  ") else { throw ValidationError.continuousBlank }
-            return true
-        }
-        
-        func stateTextField(_ text: String, color: UIColor, isEnabled: Bool) {
-            nicknameStateLabel.text = text
-            nicknameStateLabel.textColor = color
-            completeButton.isEnabled = isEnabled
-        }
+        viewModel.inputText.value = nicknameTextField.text ?? ""
     }
     
     @objc func completeButtonClicked() {

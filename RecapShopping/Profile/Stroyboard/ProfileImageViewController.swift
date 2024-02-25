@@ -24,7 +24,7 @@ class ProfileImageViewController: UIViewController {
         super.viewDidLoad()
         
         setNavigation()
-        configureUI()
+        configureView()
         configureCollectionView()
     }
     
@@ -43,9 +43,9 @@ extension ProfileImageViewController {
     }
 }
 
-// MARK: configureUI
+// MARK: configureView
 extension ProfileImageViewController {
-    func configureUI() {
+    func configureView() {
         setViewBackgroundColor()
         profileImageCollectionView.setCollectionViewBackgroundColor()
         let profileImage = UserDefaultsManager.shared.profileImage

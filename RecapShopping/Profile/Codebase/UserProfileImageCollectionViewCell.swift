@@ -8,13 +8,12 @@
 import UIKit
 
 class UserProfileImageCollectionViewCell: UICollectionViewCell {
-    
     let profileImageView = ProfileImageView(frame: .zero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureHierarchy()
-        configureUI()
+        configureView()
         configureConstraints()
     }
     
@@ -26,9 +25,7 @@ class UserProfileImageCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(profileImageView)
     }
     
-    func configureUI() {
-//        profileImageView.contentMode = .scaleToFill
-//        profileImageView.clipsToBounds = true
+    func configureView() {
     }
     
     func configureConstraints() {

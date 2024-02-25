@@ -23,7 +23,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        configureUI()
+        configureView()
         configureTableView()
         
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
@@ -65,9 +65,9 @@ extension SearchViewController {
     }
 }
 
-// MARK: configureUI
+// MARK: configureView
 extension SearchViewController {
-    func configureUI() {
+    func configureView() {
         setViewBackgroundColor()
         recentSearchTableView.setTableViewBackgroundColor()
         

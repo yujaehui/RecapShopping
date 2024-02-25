@@ -25,7 +25,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         setNavigation()
-        configureUI()
+        configureView()
         
         profileButton.addTarget(self, action: #selector(profileButtonClicked), for: .touchUpInside)
         completeButton.addTarget(self, action: #selector(completeButtonClicked), for: .touchUpInside)
@@ -114,9 +114,9 @@ extension ProfileViewController {
     }
 }
 
-// MARK: configureUI
+// MARK: configureView
 extension ProfileViewController {
-    func configureUI() {
+    func configureView() {
         setViewBackgroundColor()
         cameraImageView.image = UIImage(named: "camera")
         
