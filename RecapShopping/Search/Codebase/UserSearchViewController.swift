@@ -17,23 +17,25 @@ class UserSearchViewController: UIViewController {
     let emptyLabel = UILabel()
     let recentSearchTableView = UITableView()
     
-    var recentSearchList = UserDefaultsManager.shared.searchList ?? []
-    var nickname: String = ""
+    var viewModel = SearchViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindData()
         
         configureHierarchy()
         configureView()
         configureConstraints()
+        
+        recentSearchListIsEmpty()
                 
         deleteAllButton.addTarget(self, action: #selector(deleteAllButtonClicked), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        nickname = UserDefaultsManager.shared.nickname
-        setNavigation()
+        viewModel.nickname.value = UserDefaultsManager.shared.nickname
+        // 이 방법 말고 없으려나... 있겠지...
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -41,10 +43,20 @@ class UserSearchViewController: UIViewController {
     }
     
     func setNavigation() {
-        navigationItem.title = "\(nickname)의 새싹쇼핑"
+        navigationItem.title = "\(viewModel.nickname.value)의 새싹쇼핑"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.text]
         navigationController?.navigationBar.tintColor = .text
         navigationItem.backButtonTitle = ""
+    }
+    
+    func bindData() {
+        viewModel.recentSearchList.bind { _ in
+            self.recentSearchTableView.reloadData()
+        }
+        
+        viewModel.nickname.bind { _ in
+            self.setNavigation()
+        }
     }
     
     func configureHierarchy() {
@@ -85,8 +97,6 @@ class UserSearchViewController: UIViewController {
         recentSearchTableView.dataSource = self
         recentSearchTableView.delegate = self
         recentSearchTableView.register(UserRecentSearchTableViewCell.self, forCellReuseIdentifier: UserRecentSearchTableViewCell.identifier)
-        
-       recentSearchListIsEmpty()
     }
     
     func configureConstraints() {
@@ -125,28 +135,18 @@ class UserSearchViewController: UIViewController {
     }
     
     @objc func deleteButtonClicked(_ sender: UIButton) {
-        recentSearchList.remove(at: sender.tag)
-        UserDefaultsManager.shared.searchList = recentSearchList
+        viewModel.inputDeleteIndex.value = sender.tag
         recentSearchListIsEmpty()
-        recentSearchTableView.reloadData()
     }
     
     @objc func deleteAllButtonClicked() {
-        recentSearchList.removeAll()
-        UserDefaultsManager.shared.searchList = recentSearchList
+        viewModel.inputDeletAllButtonClicked.value = ()
         recentSearchListIsEmpty()
-        recentSearchTableView.reloadData()
-    }
-}
-
-extension UserSearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text, !text.isEmpty else { return }
-        search(text: text)
     }
     
+    // 이 함수는 뷰컨에 있는게 맞으려나...
     func recentSearchListIsEmpty() {
-        if recentSearchList.isEmpty {
+        if viewModel.recentSearchList.value.isEmpty {
             recentSearchLabel.text = ""
             deleteAllButton.isHidden = true
             recentSearchTableView.isHidden = true
@@ -156,16 +156,14 @@ extension UserSearchViewController: UISearchBarDelegate {
             recentSearchTableView.isHidden = false
         }
     }
-    
-    func search(text: String) {
-        recentSearchList.removeAll { $0 == text }
-        recentSearchList.insert(text, at: 0)
-        if recentSearchList.count > 7 {
-            recentSearchList.removeLast()
-        }
-        UserDefaultsManager.shared.searchList = recentSearchList
-        recentSearchTableView.reloadData()
+}
 
+extension UserSearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.inputSearchText.value = searchBar.text
+
+        // 이 아래 코드는 어케하는 게 좋으려나...
+        guard let text = searchBar.text, !text.isEmpty else { return }
         let vc = UserSearchResultViewController()
         vc.searchText = text
         navigationController?.pushViewController(vc, animated: true)
@@ -177,26 +175,32 @@ extension UserSearchViewController: UISearchBarDelegate {
 
 extension UserSearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recentSearchList.count
+        return viewModel.recentSearchList.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UserRecentSearchTableViewCell.identifier, for: indexPath) as! UserRecentSearchTableViewCell
-        cell.recentSearchLabel.text = recentSearchList[indexPath.row]
+        cell.recentSearchLabel.text = viewModel.recentSearchList.value[indexPath.row]
         cell.deleteButton.tag = indexPath.row
         cell.deleteButton.addTarget(self, action: #selector(deleteButtonClicked), for: .touchUpInside)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchBar.text = recentSearchList[indexPath.row]
+        searchBar.text = viewModel.recentSearchList.value[indexPath.row]
+        viewModel.inputSearchText.value = searchBar.text
+
+        // 이 아래 코드는 어케하는 게 좋으려나...
         guard let text = searchBar.text, !text.isEmpty else { return }
-        search(text: text)
+        let vc = UserSearchResultViewController()
+        vc.searchText = text
+        navigationController?.pushViewController(vc, animated: true)
+        
+        searchBar.text = ""
+        recentSearchListIsEmpty()
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
 }
-
-

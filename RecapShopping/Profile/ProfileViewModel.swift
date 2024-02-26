@@ -14,14 +14,11 @@ class ProfileViewModel {
     var outputText = Observable("")
     var outputColor = Observable(true)
     
-    
-
     init() {
         inputText.bind { value in
             self.errorValidation(input: value)
         }
     }
-    
     
     func errorValidation(input: String) {
         let forbiddenCharacters = ["@", "#", "$", "%"]

@@ -31,7 +31,7 @@ class UserProfileViewController: UIViewController {
     var userNickname = ""
     
     let viewModel = ProfileViewModel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -53,6 +53,7 @@
 		092A13692B6636170093636A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 092A13682B6636170093636A /* SnapKit */; };
 		092A136B2B6636170093636A /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 092A136A2B6636170093636A /* SnapKit-Dynamic */; };
 		092A136D2B6637A20093636A /* UserRecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092A136C2B6637A20093636A /* UserRecentSearchTableViewCell.swift */; };
+		097F1E3C2B8CD78F00436387 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097F1E3B2B8CD78F00436387 /* SearchViewModel.swift */; };
 		09A91C0C2B888899005755C1 /* UserSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C0B2B888899005755C1 /* UserSearchResultViewController.swift */; };
 		09A91C0E2B889060005755C1 /* UserSearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C0D2B889060005755C1 /* UserSearchResultCollectionViewCell.swift */; };
 		09A91C102B889BFA005755C1 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A91C0F2B889BFA005755C1 /* ProfileViewModel.swift */; };
@@ -114,6 +115,7 @@
 		09191D362B5E370D00E3FE7B /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		092A13652B6636020093636A /* UserSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewController.swift; sourceTree = "<group>"; };
 		092A136C2B6637A20093636A /* UserRecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecentSearchTableViewCell.swift; sourceTree = "<group>"; };
+		097F1E3B2B8CD78F00436387 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		09A91C0B2B888899005755C1 /* UserSearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultViewController.swift; sourceTree = "<group>"; };
 		09A91C0D2B889060005755C1 /* UserSearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		09A91C0F2B889BFA005755C1 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		09191CC92B5A17E100E3FE7B /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				097F1E3B2B8CD78F00436387 /* SearchViewModel.swift */,
 				09ABBCD22B676887009B50EC /* Codebase */,
 				09ABBCDD2B679839009B50EC /* Storyboard */,
 			);
@@ -451,6 +454,7 @@
 				092A136D2B6637A20093636A /* UserRecentSearchTableViewCell.swift in Sources */,
 				09191CB42B5A17A600E3FE7B /* AppDelegate.swift in Sources */,
 				09191D242B5D4B1200E3FE7B /* UIButton+Extension.swift in Sources */,
+				097F1E3C2B8CD78F00436387 /* SearchViewModel.swift in Sources */,
 				09ABBCDB2B6797C5009B50EC /* UserProfileImageViewController.swift in Sources */,
 				09A91C142B88BB67005755C1 /* UserSearchDetailViewController.swift in Sources */,
 				09191CE22B5A422400E3FE7B /* ProfileTableViewCell.swift in Sources */,
